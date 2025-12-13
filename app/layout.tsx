@@ -19,6 +19,7 @@ const firaSans = Fira_Sans({
 })
 
 const outfit = Outfit({
+  weight: ['300', '400', '700', '800'],
   subsets: ["latin"],
   variable: "--font-outfit"
 })
@@ -53,7 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${passionOne.variable} font-passion-one antialiased`}>
+      <body className={`${passionOne.variable} ${firaSans.variable} ${outfit.variable} font-outfit antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Navbar />
           {children}
