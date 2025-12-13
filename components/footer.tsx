@@ -1,5 +1,7 @@
 "use client"
 
+import { Mail, Phone, Instagram } from 'lucide-react'
+
 export function Footer() {
   return (
     <footer id="contact" className="bg-primary text-primary-foreground py-16">
@@ -34,15 +36,30 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Contatti</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/80">
-              <li>Email: info@resetyourbody.com</li>
-              <li>Telefono: +39 XXX XXX XXXX</li>
-              <li>Instagram: @resetyourbody</li>
+              <li className="flex items-center gap-2">
+                <Mail className="h-4 w-4" />
+                <a href="mailto:info@resetyourbody.com">
+                  <span>info@resetyourbody.com</span>
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="h-4 w-4" />
+                <a href="tel:+39 3471234567">
+                  <span>+39 347 1234567</span>
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Instagram className="h-4 w-4" />
+                <a href="https://www.instagram.com/massoterapista_paradise/" target='blank'>
+                  <span>@massoterapista_paradise</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-primary-foreground/20 pt-8 text-center text-sm text-primary-foreground/70">
-          <p>&copy; 2025 Reset Your Body. Tutti i diritti riservati.</p>
+          <p>&copy; {new Date().getFullYear()} Massoterapista Paradise. Tutti i diritti riservati.</p>
         </div>
       </div>
     </footer>

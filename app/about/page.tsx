@@ -86,6 +86,24 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        {/* CTA Section */}
+        <section className="py-20 bg-gradient-to-b from-background to-secondary/30">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-4xl font-bold text-primary mb-6">Pronto a Iniziare il Tuo Reset?</h2>
+            <p className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto">
+              Prenota un appuntamento e scopri come posso aiutarti a raggiungere il tuo benessere fisico duraturo.
+            </p>
+            <a
+              href="https://calendly.com/your-booking-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-background bg-primary hover:bg-primary/90 rounded-lg transition-colors"
+            >
+              Prenota un Appuntamento
+            </a>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>

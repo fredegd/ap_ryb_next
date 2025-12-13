@@ -1,0 +1,92 @@
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  filter: blur(20px) contrast(5);
+  will-change: filter;
+  transition: background-color 0.5s ease;
+}
+
+/* Dark theme - schwarzer Hintergrund, weiße Blobs */
+.background-animation.theme-dark {
+  background-color: #000000;
+}
+
+.background-animation.theme-dark .blob {
+  background-color: #ffffff;
+}
+
+/* Light theme - weißer Hintergrund, schwarze Blobs */
+.background-animation.theme-light {
+  background-color: #ffffff;
+}
+
+.background-animation.theme-light .blob {
+  background-color: #000000;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  opacity: 0.7;
+  filter: blur(40px);
+  animation: move 15s infinite alternate, morph 10s infinite;
+  will-change: transform, border-radius;
+  transition: background-color 0.5s ease;
+}
+
+.blob1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -100px;
+  animation-duration: 15s;
+}
+
+.blob2 {
+  width: 300px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  animation-duration: 12s;
+  animation-delay: -5s;
+}
+
+.blob3 {
+  width: 250px;
+  height: 250px;
+  top: 80%;
+  left: 20%;
+  animation-duration: 18s;
+  animation-delay: -10s;
+}
+
+
+
+@keyframes move {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  to {
+    transform: translate(500px, 500px) rotate(360deg);
+  }
+}
+
+@keyframes morph {
+  0% {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  }
+
+  50% {
+    border-radius: 60% 40% 30% 70% / 50% 60% 50% 40%;
+  }
+
+  100% {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  }
+}

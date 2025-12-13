@@ -1,13 +1,27 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Passion_One, Fira_Sans, Outfit } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Nav } from "react-day-picker"
 import { Navbar } from "@/components/navbar"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const passionOne = Passion_One({
+  weight: ['400', '700', '900'],
+  subsets: ["latin"],
+  variable: "--font-passion-one"
+})
+
+const firaSans = Fira_Sans({
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ["latin"],
+  variable: "--font-fira-sans"
+})
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit"
+})
 
 export const metadata: Metadata = {
   title: "Reset Your Body",
@@ -39,7 +53,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans antialiased`}>
+      <body className={`${passionOne.variable} font-passion-one antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Navbar />
           {children}

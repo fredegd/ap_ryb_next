@@ -79,8 +79,11 @@
 }
 
 @theme inline {
-  --font-sans: "Geist", "Geist Fallback";
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --font-passion-one: var(--font-passion-one);
+  --font-fira-sans: var(--font-fira-sans);
+  --font-outfit: var(--font-outfit);
+  --font-sans: var(--font-passion-one), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -126,6 +129,12 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-fira-sans);
   }
 }
 

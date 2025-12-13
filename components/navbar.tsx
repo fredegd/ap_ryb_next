@@ -42,7 +42,7 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <img className="w-8 h-8" alt="Reset Your Body Logo" src="/favicon.svg" />
-            <span className="font-semibold text-foreground hidden sm:inline">Reset Your Body</span>
+            <span className="font-semibold text-foreground dark:text-accent sm:inline">RESET YOUR BODY</span>
           </Link>
 
           <div className="flex items-center space-x-4">
@@ -50,8 +50,8 @@ export function Navbar() {
               <Link
                 href="/about"
                 className={`transition-colors ${pathname === "/about"
-                    ? "text-accent font-semibold"
-                    : "text-foreground hover:text-accent"
+                  ? "text-accent font-semibold"
+                  : "text-foreground hover:text-accent"
                   }`}
               >
                 About
@@ -59,8 +59,8 @@ export function Navbar() {
               <Link
                 href="/servizi"
                 className={`transition-colors ${pathname?.startsWith("/servizi")
-                    ? "text-accent font-semibold"
-                    : "text-foreground hover:text-accent"
+                  ? "text-accent font-semibold"
+                  : "text-foreground hover:text-accent"
                   }`}
               >
                 Servizi
@@ -68,8 +68,8 @@ export function Navbar() {
               <Link
                 href="/blog"
                 className={`transition-colors ${pathname?.startsWith("/blog")
-                    ? "text-accent font-semibold"
-                    : "text-foreground hover:text-accent"
+                  ? "text-accent font-semibold"
+                  : "text-foreground hover:text-accent"
                   }`}
               >
                 Blog
@@ -101,8 +101,8 @@ export function Navbar() {
             <Link
               href="/about"
               className={`text-3xl font-semibold transition-colors ${pathname === "/about"
-                  ? "text-accent"
-                  : "text-foreground hover:text-accent"
+                ? "text-accent"
+                : "text-foreground hover:text-accent"
                 }`}
               onClick={closeMobileMenu}
             >
@@ -111,8 +111,8 @@ export function Navbar() {
             <Link
               href="/servizi"
               className={`text-3xl font-semibold transition-colors ${pathname?.startsWith("/servizi")
-                  ? "text-accent"
-                  : "text-foreground hover:text-accent"
+                ? "text-accent"
+                : "text-foreground hover:text-accent"
                 }`}
               onClick={closeMobileMenu}
             >
@@ -121,8 +121,8 @@ export function Navbar() {
             <Link
               href="/blog"
               className={`text-3xl font-semibold transition-colors ${pathname?.startsWith("/blog")
-                  ? "text-accent"
-                  : "text-foreground hover:text-accent"
+                ? "text-accent"
+                : "text-foreground hover:text-accent"
                 }`}
               onClick={closeMobileMenu}
             >

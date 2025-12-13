@@ -83,15 +83,20 @@ export default async function ServicePage({ params }: PageProps) {
                 </section>
 
                 {/* CTA Section */}
-                <section className="bg-primary/10 py-16">
+                <section className="py-20 bg-gradient-to-b from-background to-secondary/30">
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                        <h2 className="text-3xl font-bold text-foreground mb-6">Pronto a Iniziare?</h2>
-                        <p className="text-lg text-foreground/70 mb-8">
-                            Contattami per prenotare una sessione di {service.title.toLowerCase()}.
+                        <h2 className="text-4xl font-bold text-primary mb-6">Pronto a Iniziare il Tuo Reset?</h2>
+                        <p className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto">
+                            Prenota un appuntamento e scopri come posso aiutarti a raggiungere il tuo benessere fisico duraturo.
                         </p>
-                        <button className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
-                            Prenota Ora
-                        </button>
+                        <a
+                            href="https://calendly.com/your-booking-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-background bg-primary hover:bg-primary/90 rounded-lg transition-colors"
+                        >
+                            Prenota un Appuntamento
+                        </a>
                     </div>
                 </section>
 

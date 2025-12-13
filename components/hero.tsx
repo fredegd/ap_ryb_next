@@ -12,7 +12,7 @@ export function Hero() {
         <h1 className="text-6xl md:text-7xl font-bold mb-8 text-accent">RESET</h1>
         <h2 className="text-4xl md:text-5xl font-light text-muted-foreground mb-8">YOUR BODY</h2>
         <p className="text-lg text-foreground/70 mb-12 max-w-2xl mx-auto">
-          Alessandro Paradiso | Massoterapia & Chinesiologia
+          Alessandro Paradiso | Massoterapia | Chinesiologia
         </p>
         <button className="px-8 py-3 border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-primary-foreground transition-colors duration-300">
           SCOPRI I SERVIZI
