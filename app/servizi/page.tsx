@@ -3,10 +3,33 @@ import Link from "next/link"
 import Image from "next/image"
 import { Footer } from "@/components/footer"
 import { getAllServices } from "@/lib/services"
+import type { Metadata } from "next"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Servizi - Reset Your Body",
   description: "Scopri i percorsi benessere offerti da Alessandro Paradiso",
+  openGraph: {
+    type: 'website',
+    locale: 'it_IT',
+    url: 'https://resetyourbody.ch/servizi',
+    siteName: 'Reset Your Body',
+    title: 'Servizi - Reset Your Body',
+    description: 'Scopri i percorsi benessere offerti da Alessandro Paradiso',
+    images: [
+      {
+        url: '/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Servizi - Reset Your Body',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Servizi - Reset Your Body',
+    description: 'Scopri i percorsi benessere offerti da Alessandro Paradiso',
+    images: ['/opengraph-image.png'],
+  },
 }
 
 export default function ServiziPage() {

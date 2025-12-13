@@ -1,9 +1,32 @@
 
 import { Footer } from "@/components/footer"
+import type { Metadata } from "next"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Chi Sono - Reset Your Body",
   description: "Conosci Alessandro Paradiso e il suo approccio unico alla terapia e al movimento",
+  openGraph: {
+    type: 'website',
+    locale: 'it_IT',
+    url: 'https://resetyourbody.ch/about',
+    siteName: 'Reset Your Body',
+    title: 'Chi Sono - Reset Your Body',
+    description: 'Conosci Alessandro Paradiso e il suo approccio unico alla terapia e al movimento',
+    images: [
+      {
+        url: '/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Alessandro Paradiso - Reset Your Body',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Chi Sono - Reset Your Body',
+    description: 'Conosci Alessandro Paradiso e il suo approccio unico alla terapia e al movimento',
+    images: ['/opengraph-image.png'],
+  },
 }
 
 export default function AboutPage() {

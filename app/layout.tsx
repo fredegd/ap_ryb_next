@@ -28,6 +28,29 @@ export const metadata: Metadata = {
   title: "Reset Your Body",
   description: "Professional massage therapy and wellness services",
   generator: "",
+  metadataBase: new URL('https://resetyourbody.ch'),
+  openGraph: {
+    type: 'website',
+    locale: 'it_IT',
+    url: 'https://resetyourbody.ch',
+    siteName: 'Reset Your Body',
+    title: 'Reset Your Body',
+    description: 'Professional massage therapy and wellness services',
+    images: [
+      {
+        url: '/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Reset Your Body',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Reset Your Body',
+    description: 'Professional massage therapy and wellness services',
+    images: ['/opengraph-image.png'],
+  },
   icons: {
     icon: [
       {

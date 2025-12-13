@@ -2,10 +2,33 @@ import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Newsletter } from "@/components/newsletter"
 import { getAllBlogPosts } from "@/lib/blog"
+import type { Metadata } from "next"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Blog - Reset Your Body",
   description: "Leggi gli ultimi articoli su wellness, training e recupero fisico",
+  openGraph: {
+    type: 'website',
+    locale: 'it_IT',
+    url: 'https://resetyourbody.ch/blog',
+    siteName: 'Reset Your Body',
+    title: 'Blog - Reset Your Body',
+    description: 'Leggi gli ultimi articoli su wellness, training e recupero fisico',
+    images: [
+      {
+        url: '/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Blog - Reset Your Body',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog - Reset Your Body',
+    description: 'Leggi gli ultimi articoli su wellness, training e recupero fisico',
+    images: ['/opengraph-image.png'],
+  },
 }
 
 export default function BlogPage() {

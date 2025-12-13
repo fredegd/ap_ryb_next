@@ -31,9 +31,35 @@ export async function generateMetadata({ params }: PageProps) {
         }
     }
 
+    const imageUrl = post.image || '/opengraph-image.png'
+
     return {
         title: `${post.title} - Reset Your Body`,
         description: post.excerpt,
+        openGraph: {
+            type: 'article',
+            locale: 'it_IT',
+            url: `https://resetyourbody.ch/blog/${slug}`,
+            siteName: 'Reset Your Body',
+            title: post.title,
+            description: post.excerpt,
+            images: [
+                {
+                    url: imageUrl,
+                    width: 1200,
+                    height: 630,
+                    alt: post.title,
+                },
+            ],
+            publishedTime: post.date,
+            authors: ['Reset Your Body'],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: post.title,
+            description: post.excerpt,
+            images: [imageUrl],
+        },
     }
 }
 

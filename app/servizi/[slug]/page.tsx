@@ -30,9 +30,33 @@ export async function generateMetadata({ params }: PageProps) {
         }
     }
 
+    const imageUrl = service.image || '/opengraph-image.png'
+
     return {
         title: `${service.title} - Reset Your Body`,
         description: service.excerpt,
+        openGraph: {
+            type: 'website',
+            locale: 'it_IT',
+            url: `https://resetyourbody.ch/servizi/${slug}`,
+            siteName: 'Reset Your Body',
+            title: service.title,
+            description: service.excerpt,
+            images: [
+                {
+                    url: imageUrl,
+                    width: 1200,
+                    height: 630,
+                    alt: service.title,
+                },
+            ],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: service.title,
+            description: service.excerpt,
+            images: [imageUrl],
+        },
     }
 }
 
