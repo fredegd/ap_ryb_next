@@ -1,32 +1,12 @@
-"use client"
-
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useState } from "react"
-import { getServicesClient } from "@/lib/services-client"
 import type { Service } from "@/lib/services"
 
-export function Services() {
-  const [services, setServices] = useState<Service[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+interface ServicesProps {
+  services: Service[]
+}
 
-  useEffect(() => {
-    getServicesClient().then((data) => {
-      setServices(data.slice(0, 4))
-      setIsLoading(false)
-    })
-  }, [])
-
-  if (isLoading) {
-    return (
-      <section id="services" className="bg-secondary/50 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-16 text-primary">PERCORSI BENESSERE</h2>
-          <div className="text-center text-foreground/70">Caricamento...</div>
-        </div>
-      </section>
-    )
-  }
+export function Services({ services }: ServicesProps) {
 
   return (
     <section id="services" className="bg-secondary/50 py-20">

@@ -1,32 +1,12 @@
-"use client"
-
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useState } from "react"
-import { getBlogPostsClient } from "@/lib/blog-client"
 import type { BlogPost } from "@/lib/blog"
 
-export function Blog() {
-  const [posts, setPosts] = useState<BlogPost[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+interface BlogProps {
+  posts: BlogPost[]
+}
 
-  useEffect(() => {
-    getBlogPostsClient().then((data) => {
-      setPosts(data.slice(0, 3))
-      setIsLoading(false)
-    })
-  }, [])
-
-  if (isLoading) {
-    return (
-      <section id="blog" className="bg-background py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-16 text-primary">DAL MIO BLOG</h2>
-          <div className="text-center text-foreground/70">Caricamento...</div>
-        </div>
-      </section>
-    )
-  }
+export function Blog({ posts }: BlogProps) {
 
   return (
     <section id="blog" className="bg-background py-20">
