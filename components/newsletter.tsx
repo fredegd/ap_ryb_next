@@ -65,9 +65,8 @@ export function Newsletter() {
                     </div>
                     {message && (
                         <p
-                            className={`mt-4 text-sm ${
-                                status === "success" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
-                            }`}
+                            className={`mt-4 text-sm ${status === "success" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
+                                }`}
                         >
                             {message}
                         </p>

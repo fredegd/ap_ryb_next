@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Footer } from "@/components/footer"
+import { Newsletter } from "@/components/newsletter"
 import { getAllBlogPosts } from "@/lib/blog"
 
 export const metadata = {
@@ -61,24 +62,7 @@ export default function BlogPage() {
         </section>
 
         {/* Newsletter Section */}
-        <section className="bg-primary/10 py-16">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-6">Rimani Aggiornato</h2>
-            <p className="text-lg text-foreground/70 mb-8">
-              Iscriviti alla newsletter per ricevere i nuovi articoli direttamente nella tua casella di posta.
-            </p>
-            <div className="flex gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="La tua email"
-                className="flex-1 px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent"
-              />
-              <button className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
-                Iscriviti
-              </button>
-            </div>
-          </div>
-        </section>
+        <Newsletter />
       </main>
       <Footer />
     </div>
