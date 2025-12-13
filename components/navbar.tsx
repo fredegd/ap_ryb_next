@@ -1,36 +1,77 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import { ThemeToggle } from "./theme-toggle"
 import { Menu, X } from "lucide-react"
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const pathname = usePathname()
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen)
   const closeMobileMenu = () => setMobileMenuOpen(false)
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY < lastScrollY) {
+        // Scrolling up
+        setIsVisible(true)
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and past 100px
+        setIsVisible(false)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [lastScrollY])
+
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
+      <nav className={`sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"
+        }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold text-xs">
-              RB
-            </div>
+            <img className="w-8 h-8" alt="Reset Your Body Logo" src="/favicon.svg" />
             <span className="font-semibold text-foreground hidden sm:inline">Reset Your Body</span>
           </Link>
 
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex space-x-6 text-sm font-medium">
-              <Link href="/about" className="text-foreground hover:text-accent transition-colors">
+              <Link
+                href="/about"
+                className={`transition-colors ${pathname === "/about"
+                    ? "text-accent font-semibold"
+                    : "text-foreground hover:text-accent"
+                  }`}
+              >
                 About
               </Link>
-              <Link href="/servizi" className="text-foreground hover:text-accent transition-colors">
+              <Link
+                href="/servizi"
+                className={`transition-colors ${pathname?.startsWith("/servizi")
+                    ? "text-accent font-semibold"
+                    : "text-foreground hover:text-accent"
+                  }`}
+              >
                 Servizi
               </Link>
-              <Link href="/blog" className="text-foreground hover:text-accent transition-colors">
+              <Link
+                href="/blog"
+                className={`transition-colors ${pathname?.startsWith("/blog")
+                    ? "text-accent font-semibold"
+                    : "text-foreground hover:text-accent"
+                  }`}
+              >
                 Blog
               </Link>
               <a href="#contact" className="text-foreground hover:text-accent transition-colors">
@@ -59,21 +100,30 @@ export function Navbar() {
           <div className="relative h-full flex flex-col items-center justify-center space-y-8">
             <Link
               href="/about"
-              className="text-3xl font-semibold text-foreground hover:text-accent transition-colors"
+              className={`text-3xl font-semibold transition-colors ${pathname === "/about"
+                  ? "text-accent"
+                  : "text-foreground hover:text-accent"
+                }`}
               onClick={closeMobileMenu}
             >
               About
             </Link>
             <Link
               href="/servizi"
-              className="text-3xl font-semibold text-foreground hover:text-accent transition-colors"
+              className={`text-3xl font-semibold transition-colors ${pathname?.startsWith("/servizi")
+                  ? "text-accent"
+                  : "text-foreground hover:text-accent"
+                }`}
               onClick={closeMobileMenu}
             >
               Servizi
             </Link>
             <Link
               href="/blog"
-              className="text-3xl font-semibold text-foreground hover:text-accent transition-colors"
+              className={`text-3xl font-semibold transition-colors ${pathname?.startsWith("/blog")
+                  ? "text-accent"
+                  : "text-foreground hover:text-accent"
+                }`}
               onClick={closeMobileMenu}
             >
               Blog
