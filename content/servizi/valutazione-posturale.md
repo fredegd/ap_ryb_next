@@ -2,7 +2,7 @@
 id: 3
 title: "Valutazione Posturale"
 slug: "valutazione-posturale"
-image: "/images/servizi/valutazione-posturale.jpg"
+image: "/images/servizi/valutazione-posturale.png"
 description: "Una valutazione dettagliata della postura per identificare squilibri e disallineamenti"
 excerpt: "Una valutazione completa della postura del tuo corpo che identifica squilibri e disallineamenti per prevenire dolori e ottimizzare le prestazioni."
 ---

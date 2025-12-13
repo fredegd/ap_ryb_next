@@ -32,8 +32,15 @@ export default function ServiziPage() {
             <div className="space-y-12">
               {services.map((service) => (
                 <article key={service.id} className="border-b border-border pb-12 last:border-b-0">
-                  <Link href={`/servizi/${service.slug}`}>
-                    <h2 className="text-3xl font-bold text-foreground mb-4 hover:text-primary transition-colors cursor-pointer">
+                  <Link href={`/servizi/${service.slug}`} className="block group">
+                    <div className="relative h-64 mb-6 rounded-lg overflow-hidden">
+                      <div
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                        style={{ backgroundImage: `url(${service.image})` }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    </div>
+                    <h2 className="text-3xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">
                       {service.title}
                     </h2>
                   </Link>

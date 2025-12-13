@@ -2,7 +2,7 @@
 id: 4
 title: "Personal Training"
 slug: "personal-training"
-image: "/images/servizi/personal-training.jpg"
+image: "/images/servizi/personal-training.png"
 description: "Programmi di allenamento personalizzati progettati per le tue aspirazioni"
 excerpt: "Programmi di allenamento personalizzati allineati alle tue aspirazioni di fitness, con supporto costante e risultati garantiti."
 ---
