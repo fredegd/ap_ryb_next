@@ -15,8 +15,12 @@ if (!process.env.CONTENTFUL_MANAGEMENT_TOKEN?.startsWith('CFPAT-')) {
     process.exit(1);
 }
 
+const migrationFile = process.argv[2]
+    ? path.resolve(process.cwd(), process.argv[2])
+    : path.resolve(__dirname, 'contentful-migration.js');
+
 const options = {
-    filePath: path.resolve(__dirname, 'contentful-migration.js'),
+    filePath: migrationFile,
     spaceId: process.env.CONTENTFUL_SPACE_ID,
     accessToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN,
     environmentId: 'master',

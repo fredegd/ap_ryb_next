@@ -108,7 +108,7 @@ export default async function ServicePage({ params }: PageProps) {
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                         <h2 className="text-4xl font-bold text-primary mb-6">Pronto a Iniziare il Tuo Reset?</h2>
                         <p className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto">
-                            Prenota un appuntamento e scopri come posso aiutarti a raggiungere il tuo benessere fisico duraturo.
+                            Scopri come posso aiutarti a raggiungere il tuo benessere fisico duraturo.
                         </p>
                         <a
                             href="https://calendly.com/your-booking-link"

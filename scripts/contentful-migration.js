@@ -32,9 +32,18 @@ module.exports = function (migration) {
     .name('Titel/Position')
     .type('Symbol');
 
+  author.createField('slogan')
+    .name('Slogan')
+    .type('Symbol');
+
   author.createField('bio')
     .name('Biography')
-    .type('Text');
+    .type('RichText');
+
+  author.createField('promise')
+    .name('Promise')
+    .type('Text')
+    .validations([{ size: { max: 600 } }]);
 
   author.createField('email')
     .name('Email')
@@ -57,6 +66,11 @@ module.exports = function (migration) {
       linkType: 'Entry',
       validations: [{ linkContentType: ['targetGroup'] }]
     });
+
+  author.createField('bookingLink')
+    .name('Booking Link')
+    .type('Symbol')
+    .validations([{ regexp: { pattern: '^(ftp|http|https):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-\\/]))?$' } }]);
 
   // 2. CATEGORY Content Type
   const category = migration.createContentType('category')

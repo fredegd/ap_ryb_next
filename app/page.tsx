@@ -9,7 +9,7 @@ import { getAllBlogPosts } from "@/lib/blog"
 
 export default async function Home() {
   const services = (await getAllServices()).slice(0, 4)
-  const posts = (await getAllBlogPosts()).slice(0, 3)
+  const posts = (await getAllBlogPosts()).slice(0, 4)
 
   return (
     <div className="min-h-screen">

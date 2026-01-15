@@ -13,7 +13,7 @@ export function Blog({ posts }: BlogProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center mb-16 text-primary">DAL MIO BLOG</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {posts.map((post) => (
             <Link key={post.slug} href={`/blog/${post.slug}`}>
               <div className="group relative overflow-hidden rounded-lg h-96 cursor-pointer">

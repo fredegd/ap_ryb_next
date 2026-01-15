@@ -1,5 +1,8 @@
-
 import { Footer } from "@/components/footer"
+import { getAuthorById } from "@/lib/contentful"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { BLOCKS, Document } from "@contentful/rich-text-types"
+import { marked } from "marked"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -29,7 +32,38 @@ export const metadata: Metadata = {
   },
 }
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const authorId = process.env.AUTHOR_ENTRY_ID
+
+  if (!authorId) {
+    return <div>Author ID not configured</div>
+  }
+
+  const author = await getAuthorById(authorId)
+
+  if (!author) {
+    return <div>Author not found</div>
+  }
+
+  const richTextOptions = {
+    renderNode: {
+      [BLOCKS.HEADING_2]: (node: any, children: any) => (
+        <h2 className="text-3xl font-bold text-primary mb-6 mt-12 first:mt-0">{children}</h2>
+      ),
+      [BLOCKS.HEADING_3]: (node: any, children: any) => (
+        <h3 className="text-2xl font-bold text-primary mb-4 mt-8">{children}</h3>
+      ),
+      [BLOCKS.PARAGRAPH]: (node: any, children: any) => (
+        <p className="text-lg text-foreground/70 leading-relaxed mb-4">{children}</p>
+      ),
+      [BLOCKS.UL_LIST]: (node: any, children: any) => (
+        <ul className="list-disc pl-6 mb-6 space-y-2 text-lg text-foreground/70">{children}</ul>
+      ),
+    },
+  }
+
+  const promiseHtml = author.promise ? await marked(author.promise) : ""
+
   return (
     <div className="min-h-screen">
 
@@ -37,8 +71,21 @@ export default function AboutPage() {
         {/* Hero Section */}
         <section className="bg-gradient-to-b from-secondary/30 to-background py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-5xl font-bold text-primary mb-6 text-center">ALESSANDRO PARADISO</h1>
-            <p className="text-2xl text-foreground/70 text-center">TERAPIA E MOVIMENTO</p>
+            <h1 className="text-5xl font-bold text-primary mb-6 text-center uppercase">{author.name}</h1>
+            {author.slogan && (
+              <p className="text-2xl text-foreground/70 text-center uppercase mb-8">{author.slogan}</p>
+            )}
+            {author.profileImageUrl && (
+              <div className="relative w-full aspect-4/3 rounded-md mx-auto overflow-hidden border-2 border-primary/20 shadow-xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={author.profileImageUrl}
+                  alt={author.name}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            )}
+
           </div>
         </section>
 
@@ -46,66 +93,39 @@ export default function AboutPage() {
         <section className="py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="space-y-12">
+
+              {/* Bio RichText */}
               <div>
-                <h2 className="text-3xl font-bold text-primary mb-6">La Mia Visione</h2>
-                <p className="text-lg text-foreground/70 leading-relaxed mb-4">
-                  Benvenuti nello studio dove la <span className="font-semibold">Massoterapia</span> si unisce alla{" "}
-                  <span className="font-semibold">Chinesiologia</span> per un recupero funzionale completo. Il mio
-                  approccio non si limita al sollievo immediato, ma mira a un reset duraturo del tuo corpo, correggendo
-                  la causa del problema attraverso la terapia manuale e il movimento guidato.
-                </p>
+                {author.bio && documentToReactComponents(author.bio, richTextOptions)}
               </div>
 
-              <div>
-                <h2 className="text-3xl font-bold text-primary mb-6">L'Approccio Olistico</h2>
-                <p className="text-lg text-foreground/70 leading-relaxed mb-4">
-                  Offro un percorso personalizzato per atleti, professionisti e chiunque cerchi di migliorare il proprio
-                  benessere fisico. Dalla gestione del dolore cronico all'ottimizzazione della performance sportiva, il
-                  focus è sempre sul ripristino dell'equilibrio e della funzionalità corporea.
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-3xl font-bold text-primary mb-6">Per Chi Lavoro</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="bg-secondary/30 p-6 rounded-lg">
-                    <h3 className="text-xl font-bold text-primary mb-3">Atleti e Sportivi</h3>
-                    <p className="text-foreground/70">
-                      Optimizzo la performance e riduco il rischio di infortuni attraverso valutazioni posturali
-                      specifiche e programmi di recupero mirati.
-                    </p>
-                  </div>
-                  <div className="bg-secondary/30 p-6 rounded-lg">
-                    <h3 className="text-xl font-bold text-primary mb-3">Professionisti</h3>
-                    <p className="text-foreground/70">
-                      Gestisco le tensioni derivanti da lavoro sedentario e stress, ripristinando l'equilibrio muscolare
-                      e la funzionalità corporea.
-                    </p>
-                  </div>
-                  <div className="bg-secondary/30 p-6 rounded-lg">
-                    <h3 className="text-xl font-bold text-primary mb-3">Pazienti Cronici</h3>
-                    <p className="text-foreground/70">
-                      Offro un approccio integrato per gestire il dolore cronico e migliorare la qualità della vita
-                      quotidiana.
-                    </p>
-                  </div>
-                  <div className="bg-secondary/30 p-6 rounded-lg">
-                    <h3 className="text-xl font-bold text-primary mb-3">Chi Cerchi Benessere</h3>
-                    <p className="text-foreground/70">
-                      Chiunque desideri investire nella propria salute e raggiungere un equilibrio corpo-mente duraturo.
-                    </p>
+              {/* Target Groups / Per Chi Lavoro */}
+              {author.targetGroups && author.targetGroups.length > 0 && (
+                <div>
+                  <h2 className="text-3xl font-bold text-primary mb-6">Per Chi Lavoro</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {author.targetGroups.map((group, index) => (
+                      <div key={index} className="bg-secondary/30 p-6 rounded-lg">
+                        <h3 className="text-xl font-bold text-primary mb-3">{group.name}</h3>
+                        {group.targetingMethod && (
+                          <p className="text-foreground/70">
+                            {group.targetingMethod}
+                          </p>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
+              )}
 
               <div className="bg-primary/10 p-8 rounded-lg">
                 <h2 className="text-2xl font-bold text-primary mb-4">La Promessa</h2>
-                <p className="text-lg text-foreground/70">
-                  Non offro semplici soluzioni temporanee. Offro un reset vero e proprio: un percorso che ti restituisce
-                  il controllo del tuo corpo, eliminando la causa del problema e non solo il sintomo. Il risultato è un
-                  benessere duraturo che cambia il tuo stile di vita.
-                </p>
+                <div
+                  className="text-lg text-foreground/70 prose prose-primary max-w-none"
+                  dangerouslySetInnerHTML={{ __html: promiseHtml }}
+                />
               </div>
+
             </div>
           </div>
         </section>
@@ -115,10 +135,10 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-4xl font-bold text-primary mb-6">Pronto a Iniziare il Tuo Reset?</h2>
             <p className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto">
-              Prenota un appuntamento e scopri come posso aiutarti a raggiungere il tuo benessere fisico duraturo.
+              Scopri come posso aiutarti a raggiungere il tuo benessere fisico duraturo.
             </p>
             <a
-              href="https://calendly.com/your-booking-link"
+              href={author.bookingLink || "#"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-background bg-primary hover:bg-primary/90 rounded-lg transition-colors"

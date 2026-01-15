@@ -1,8 +1,18 @@
-"use client"
+import { Mail, Phone, Instagram, Facebook, Twitter, Linkedin, Github } from 'lucide-react'
+import { getAuthorContactDetails } from "@/lib/contentful"
 
-import { Mail, Phone, Instagram } from 'lucide-react'
+const SOCIAL_ICONS: Record<string, any> = {
+  instagram: Instagram,
+  facebook: Facebook,
+  twitter: Twitter,
+  linkedin: Linkedin,
+  github: Github,
+}
 
-export function Footer() {
+export async function Footer() {
+  const authorId = process.env.AUTHOR_ENTRY_ID
+  const author = authorId ? await getAuthorContactDetails(authorId) : null
+
   return (
     <footer id="contact" className="bg-primary text-primary-foreground py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,24 +46,51 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Contatti</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/80">
-              <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4" />
-                <a href="mailto:info@resetyourbody.com">
-                  <span>info@resetyourbody.com</span>
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
-                <a href="tel:+39 3471234567">
-                  <span>+39 347 1234567</span>
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Instagram className="h-4 w-4" />
-                <a href="https://www.instagram.com/massoterapista_paradise/" target='blank'>
-                  <span>@massoterapista_paradise</span>
-                </a>
-              </li>
+              {author?.email && (
+                <li className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  <a href={`mailto:${author.email}`}>
+                    <span>{author.email}</span>
+                  </a>
+                </li>
+              )}
+              {author?.phone && (
+                <li className="flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  <a href={`tel:${author.phone}`}>
+                    <span>{author.phone}</span>
+                  </a>
+                </li>
+              )}
+
+              {author?.socialLinks && Object.entries(author.socialLinks).map(([platform, url]) => {
+                const Icon = SOCIAL_ICONS[platform.toLowerCase()] || Instagram
+                // formatting the handle for display (e.g. from https://instagram.com/user -> @user)
+                // simpler approach: just show the platform name or "Follow us" content?
+                // The design showed "@massoterapista_paradise".
+                // I'll try to extract the handle if possible or just show the platform name if not.
+                // Actually the previous code had specific text. Let's start with just linking the icon + platform name if we can't parse easily.
+                // Or better, for now just show the URL or a generic text if we can't extract the handle. 
+                // Let's assume the value in Contentful is a full URL.
+
+                // If it's instagram, let's try to extract handle.
+                let displayText = platform
+                if (url.includes('instagram.com/')) {
+                  const parts = url.split('instagram.com/')
+                  if (parts[1]) displayText = '@' + parts[1].replace(/\/$/, '')
+                } else {
+                  displayText = platform.charAt(0).toUpperCase() + platform.slice(1)
+                }
+
+                return (
+                  <li key={platform} className="flex items-center gap-2">
+                    <Icon className="h-4 w-4" />
+                    <a href={url} target='_blank' rel="noopener noreferrer">
+                      <span>{displayText}</span>
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </div>

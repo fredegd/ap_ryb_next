@@ -3,6 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Footer } from "@/components/footer"
 import { getAllServices } from "@/lib/services"
+import { getAuthorById } from "@/lib/contentful"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -34,6 +35,8 @@ export const metadata: Metadata = {
 
 export default async function ServiziPage() {
   const services = await getAllServices()
+  const authorId = process.env.AUTHOR_ENTRY_ID
+  const author = authorId ? await getAuthorById(authorId) : null
 
   return (
     <div className="min-h-screen">
@@ -98,9 +101,14 @@ export default async function ServiziPage() {
             <p className="text-lg text-foreground/70 mb-8">
               Contattami per prenotare la tua prima sessione di consulenza.
             </p>
-            <button className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+            <a
+              href={author?.bookingLink || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-block"
+            >
               Prenota Ora
-            </button>
+            </a>
           </div>
         </section>
       </main>

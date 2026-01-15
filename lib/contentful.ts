@@ -123,3 +123,75 @@ export function resolveAssetUrl(
 
   return url.startsWith("//") ? `https:${url}` : url;
 }
+// Types for Author and TargetGroup
+export type TargetGroupFields = {
+  name: string;
+  targetingMethod?: string;
+};
+
+export type AuthorFields = {
+  name: string;
+  slug: string;
+  slogan?: string;
+  promise?: string;
+  bio?: any; // RichText
+  jobTitle?: string;
+  phone?: string;
+  email?: string;
+  targetGroups?: ContentfulLink[];
+  profileImage?: ContentfulLink;
+  socialLinks?: Record<string, string>;
+  bookingLink?: string;
+};
+
+export async function getAuthorById(id: string) {
+  const response = await contentfulFetch<AuthorFields>(
+    `/entries`,
+    {
+      "sys.id": id,
+      include: 2, // Include linked entries (targetGroups) and assets
+      content_type: "author", 
+    }
+  );
+
+  const { entriesById, assetsById } = buildIncludesMap(response.includes);
+  const authorEntry = response.items[0];
+
+  if (!authorEntry) {
+    return null;
+  }
+
+  // Resolve Target Groups
+  const resolvedTargetGroups = authorEntry.fields.targetGroups?.map((link) => {
+    const entry = resolveEntry(link, entriesById);
+    return entry ? (entry.fields as TargetGroupFields) : null;
+  }).filter((tg): tg is TargetGroupFields => tg !== null) ?? [];
+
+  // Resolve Profile Image
+  const profileImageUrl = resolveAssetUrl(authorEntry.fields.profileImage, assetsById);
+
+  return {
+    ...authorEntry.fields,
+    targetGroups: resolvedTargetGroups,
+    profileImageUrl,
+  };
+}
+
+export async function getAuthorContactDetails(id: string) {
+  const response = await contentfulFetch<Pick<AuthorFields, 'email' | 'phone' | 'socialLinks'>>(
+    `/entries`,
+    {
+      "sys.id": id,
+      select: "fields.email,fields.phone,fields.socialLinks",
+      content_type: "author",
+    }
+  );
+
+  const authorEntry = response.items[0];
+
+  if (!authorEntry) {
+    return null;
+  }
+
+  return authorEntry.fields;
+}
