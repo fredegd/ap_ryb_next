@@ -41,21 +41,13 @@ export function Navbar() {
         }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <img className="w-8 h-8" alt="Reset Your Body Logo" src="/favicon.svg" />
-            <span className="font-semibold text-foreground dark:text-accent sm:inline font-passion-one">RESET YOUR BODY</span>
+            <img className="w-8 h-8" alt="AP Logo" src="/favicon.svg" />
+            <span className="font-semibold text-foreground dark:text-accent sm:inline font-passion-one">MASSOTERAPIA</span>
           </Link>
 
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex space-x-6 text-sm font-medium">
-              <Link
-                href="/about"
-                className={`transition-colors ${pathname === "/about"
-                  ? "text-accent font-semibold"
-                  : "text-foreground hover:text-accent"
-                  }`}
-              >
-                About
-              </Link>
+
               <Link
                 href="/servizi"
                 className={`transition-colors ${pathname?.startsWith("/servizi")
@@ -73,6 +65,15 @@ export function Navbar() {
                   }`}
               >
                 Blog
+              </Link>
+              <Link
+                href="/about"
+                className={`transition-colors ${pathname === "/about"
+                  ? "text-accent font-semibold"
+                  : "text-foreground hover:text-accent"
+                  }`}
+              >
+                About
               </Link>
               <a href="#contact" className="text-foreground hover:text-accent transition-colors">
                 Contatti

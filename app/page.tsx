@@ -7,9 +7,9 @@ import { BackgroundAnimation } from "@/components/BackgroundAnimation"
 import { getAllServices } from "@/lib/services"
 import { getAllBlogPosts } from "@/lib/blog"
 
-export default function Home() {
-  const services = getAllServices().slice(0, 4)
-  const posts = getAllBlogPosts().slice(0, 3)
+export default async function Home() {
+  const services = (await getAllServices()).slice(0, 4)
+  const posts = (await getAllBlogPosts()).slice(0, 3)
 
   return (
     <div className="min-h-screen">

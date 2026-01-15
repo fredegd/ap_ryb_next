@@ -40,6 +40,15 @@ export function Blog({ posts }: BlogProps) {
             </Link>
           ))}
         </div>
+
+        <div className="mt-12 flex justify-center">
+          <Link
+            href="/blog"
+            className="inline-flex items-center justify-center rounded-full border border-primary px-6 py-3 text-sm font-semibold uppercase tracking-wide text-primary transition-colors hover:bg-primary hover:text-white"
+          >
+            Leggi gli Articoli →
+          </Link>
+        </div>
       </div>
     </section>
   )

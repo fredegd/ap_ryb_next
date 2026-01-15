@@ -1,69 +1,104 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { fileURLToPath } from "url";
+import type { Document } from "@contentful/rich-text-types";
+import {
+  buildIncludesMap,
+  contentfulFetch,
+  resolveAssetUrl,
+  resolveEntry,
+  type ContentfulLink,
+} from "./contentful";
 
 export interface Service {
-  id: number;
+  id: string;
   title: string;
   slug: string;
   image: string;
   description: string;
   excerpt: string;
-  content: string;
+  content: Document;
+  metaDescription?: string;
+  serviceCategories: string[];
 }
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const contentDirectory = path.join(__dirname, "..", "content", "servizi");
+type ServiceFields = {
+  serviceName: string;
+  slug: string;
+  metaDescription?: string;
+  heroImage: ContentfulLink;
+  detailedDescription: Document;
+  order?: number;
+  status?: string;
+  serviceCategory?: ContentfulLink[];
+};
 
-export function getAllServices(): Service[] {
-  const fileNames = fs.readdirSync(contentDirectory);
-  const services = fileNames
-    .filter((fileName) => fileName.endsWith(".md"))
-    .map((fileName) => {
-      const filePath = path.join(contentDirectory, fileName);
-      const fileContents = fs.readFileSync(filePath, "utf8");
-      const { data, content } = matter(fileContents);
+function mapService(
+  item: { sys: { id: string }; fields: ServiceFields },
+  includes?: ReturnType<typeof buildIncludesMap>
+): Service {
+  const { assetsById, entriesById } = includes ?? {
+    entriesById: new Map(),
+    assetsById: new Map(),
+  };
 
-      return {
-        id: data.id,
-        title: data.title,
-        slug: data.slug,
-        image: data.image,
-        description: data.description,
-        excerpt: data.excerpt,
-        content,
-      } as Service;
-    });
+  const imageUrl = resolveAssetUrl(item.fields.heroImage, assetsById);
+  const metaDescription = item.fields.metaDescription ?? "";
+  const categoryNames =
+    item.fields.serviceCategory
+      ?.map((link) => resolveEntry(link, entriesById))
+      .map((entry) => entry?.fields?.name as string | undefined)
+      .filter((name): name is string => Boolean(name)) ?? [];
 
-  // Sort by id
-  return services.sort((a, b) => a.id - b.id);
+  return {
+    id: item.sys.id,
+    title: item.fields.serviceName,
+    slug: item.fields.slug,
+    image: imageUrl ?? "/opengraph-image.png",
+    description: metaDescription,
+    excerpt: metaDescription,
+    content: item.fields.detailedDescription,
+    metaDescription: item.fields.metaDescription,
+    serviceCategories: categoryNames,
+  };
 }
 
-export function getServiceBySlug(slug: string): Service | null {
-  try {
-    const filePath = path.join(contentDirectory, `${slug}.md`);
-    const fileContents = fs.readFileSync(filePath, "utf8");
-    const { data, content } = matter(fileContents);
+export async function getAllServices(): Promise<Service[]> {
+  const response = await contentfulFetch<ServiceFields>("/entries", {
+    content_type: "service",
+    include: 2,
+    order: "fields.order",
+    "fields.status": "Active",
+  });
 
-    return {
-      id: data.id,
-      title: data.title,
-      slug: data.slug,
-      image: data.image,
-      description: data.description,
-      excerpt: data.excerpt,
-      content,
-    } as Service;
-  } catch (error) {
+  const includes = buildIncludesMap(response.includes);
+  return response.items.map((item) => mapService(item, includes));
+}
+
+export async function getServiceBySlug(slug: string): Promise<Service | null> {
+  const response = await contentfulFetch<ServiceFields>("/entries", {
+    content_type: "service",
+    include: 2,
+    limit: 1,
+    "fields.slug": slug,
+    "fields.status": "Active",
+  });
+
+  const includes = buildIncludesMap(response.includes);
+  const item = response.items[0];
+  if (!item) {
     return null;
   }
+
+  return mapService(item, includes);
 }
 
-export function getServiceSlugs(): string[] {
-  const fileNames = fs.readdirSync(contentDirectory);
-  return fileNames
-    .filter((fileName) => fileName.endsWith(".md"))
-    .map((fileName) => fileName.replace(".md", ""));
+export async function getServiceSlugs(): Promise<string[]> {
+  const response = await contentfulFetch<Pick<ServiceFields, "slug">>(
+    "/entries",
+    {
+      content_type: "service",
+      select: "fields.slug",
+      "fields.status": "Active",
+    }
+  );
+
+  return response.items.map((item) => item.fields.slug);
 }

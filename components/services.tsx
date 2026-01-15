@@ -38,11 +38,12 @@ export function Services({ services }: ServicesProps) {
           ))}
         </div>
 
-        <div className="text-center mt-16">
-          <Link href="/servizi">
-            <h3 className="text-2xl font-bold text-foreground mb-4 hover:text-primary transition-colors cursor-pointer">
-              Vedi Tutti i Servizi
-            </h3>
+        <div className="mt-16 flex justify-center">
+          <Link
+            href="/servizi"
+            className="inline-flex items-center justify-center rounded-full border border-primary px-6 py-3 text-sm font-semibold uppercase tracking-wide text-primary transition-colors hover:bg-primary hover:text-white"
+          >
+            Vedi Tutti i Servizi →
           </Link>
         </div>
       </div>

@@ -32,14 +32,14 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ServiziPage() {
-  const services = getAllServices()
+export default async function ServiziPage() {
+  const services = await getAllServices()
 
   return (
     <div className="min-h-screen">
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-secondary/30 to-background py-20">
+        <section className="bg-linear-to-b from-secondary/30 to-background py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-5xl font-bold text-primary mb-6 text-center">PERCORSI BENESSERE</h1>
             <p className="text-lg text-foreground/70 text-center max-w-2xl mx-auto">
@@ -61,7 +61,19 @@ export default function ServiziPage() {
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
                         style={{ backgroundImage: `url(${service.image})` }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+                      {service.serviceCategories.length > 0 ? (
+                        <div className="absolute bottom-4 left-4 flex flex-wrap items-center gap-2">
+                          {service.serviceCategories.map((category) => (
+                            <span
+                              key={category}
+                              className="inline-block px-3 py-1 bg-accent/90 text-white font-semibold text-sm rounded"
+                            >
+                              {category}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
                     </div>
                     <h2 className="text-3xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">
                       {service.title}

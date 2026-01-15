@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { getServiceBySlug, getServiceSlugs } from "@/lib/services"
 import { notFound } from "next/navigation"
-import { marked } from "marked"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
 interface PageProps {
     params: {
@@ -14,7 +14,7 @@ interface PageProps {
 export const dynamicParams = true
 
 export async function generateStaticParams() {
-    const slugs = getServiceSlugs()
+    const slugs = await getServiceSlugs()
     return slugs.map((slug) => ({
         slug,
     }))
@@ -22,7 +22,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps) {
     const { slug } = await params
-    const service = getServiceBySlug(slug)
+    const service = await getServiceBySlug(slug)
 
     if (!service) {
         return {
@@ -62,13 +62,13 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function ServicePage({ params }: PageProps) {
     const { slug } = await params
-    const service = getServiceBySlug(slug)
+    const service = await getServiceBySlug(slug)
 
     if (!service) {
         notFound()
     }
 
-    const htmlContent = marked(service.content)
+    const richContent = documentToReactComponents(service.content)
 
     return (
         <div className="min-h-screen">
@@ -97,11 +97,8 @@ export default async function ServicePage({ params }: PageProps) {
                 {/* Service Content */}
                 <section className="py-16 md:py-20">
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <article className="prose prose-invert max-w-none">
-                            <div
-                                dangerouslySetInnerHTML={{ __html: htmlContent }}
-                                className="space-y-6 text-lg text-foreground/80 leading-relaxed"
-                            />
+                        <article className="prose prose-invert max-w-none space-y-6 text-lg text-foreground/80 leading-relaxed">
+                            {richContent}
                         </article>
                     </div>
                 </section>

@@ -4,7 +4,7 @@ import { Footer } from "@/components/footer"
 import { Newsletter } from "@/components/newsletter"
 import { getBlogPostBySlug, getBlogPostSlugs } from "@/lib/blog"
 import { notFound } from "next/navigation"
-import { marked } from "marked"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
 interface PageProps {
     params: {
@@ -15,7 +15,7 @@ interface PageProps {
 export const dynamicParams = true
 
 export async function generateStaticParams() {
-    const slugs = getBlogPostSlugs()
+    const slugs = await getBlogPostSlugs()
     return slugs.map((slug) => ({
         slug,
     }))
@@ -23,7 +23,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps) {
     const { slug } = await params
-    const post = getBlogPostBySlug(slug)
+    const post = await getBlogPostBySlug(slug)
 
     if (!post) {
         return {
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: PageProps) {
                     alt: post.title,
                 },
             ],
-            publishedTime: post.date,
+            publishedTime: post.publishDate,
             authors: ['Reset Your Body'],
         },
         twitter: {
@@ -65,13 +65,13 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function BlogPostPage({ params }: PageProps) {
     const { slug } = await params
-    const post = getBlogPostBySlug(slug)
+    const post = await getBlogPostBySlug(slug)
 
     if (!post) {
         notFound()
     }
 
-    const htmlContent = marked(post.content)
+    const richContent = documentToReactComponents(post.content)
 
     return (
         <div className="min-h-screen">
@@ -111,10 +111,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                         </div>
 
                         {/* Article Content */}
-                        <article
-                            className="prose prose-invert max-w-none mb-16"
-                            dangerouslySetInnerHTML={{ __html: htmlContent }}
-                        />
+                        <article className="prose prose-invert max-w-none mb-16">
+                            {richContent}
+                        </article>
 
                         {/* Navigation */}
                         <div className="pt-8 border-t border-border">
