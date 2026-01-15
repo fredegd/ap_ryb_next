@@ -55,63 +55,55 @@ export default async function ServiziPage() {
 
         {/* Services Grid */}
         <section className="py-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="space-y-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {services.map((service) => (
-                <article key={service.id} className="border-b border-border pb-12 last:border-b-0">
-                  <Link href={`/servizi/${service.slug}`} className="block group">
+                <Link key={service.slug} href={`/servizi/${service.slug}`}>
+                  <div
+                    className="group relative overflow-hidden rounded-lg h-96 cursor-pointer border-2 transition-colors duration-300"
+                    style={{ borderColor: service.categoryColor || 'transparent' }}
+                  >
+                    {/* Service image */}
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+
+                    {/* Mild Color Overlay */}
                     <div
-                      className="relative h-64 mb-6 rounded-lg overflow-hidden border-2 transition-colors duration-300"
-                      style={{ borderColor: service.categoryColor || 'transparent' }}
-                    >
-                      {/* Background Image */}
-                      <div
-                        className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-                        style={{ backgroundImage: `url(${service.image})` }}
-                      />
+                      className="absolute inset-0 opacity-30 transition-opacity duration-300 pointer-events-none"
+                      style={{ background: `linear-gradient(to bottom, transparent, ${service.categoryColor || 'transparent'})` }}
+                    />
 
-                      {/* Mild Color Overlay */}
-                      <div
-                        className="absolute inset-0 opacity-30 transition-opacity duration-300"
-                        style={{ background: `linear-gradient(to bottom, transparent, ${service.categoryColor || 'transparent'})` }}
-                      />
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70 group-hover:to-black/80 transition-all duration-300"></div>
 
-                      {/* Dark Overlay for Text Readability */}
-                      <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent transition-opacity duration-300 group-hover:opacity-80" />
-
-                      {/* Hover Overlay Content */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="text-white font-bold flex items-center gap-2 text-lg tracking-wide border-2 border-white/30 bg-black/20 backdrop-blur-sm px-6 py-2 rounded-full">
-                          SCOPRI IL SERVIZIO <ArrowRight className="w-5 h-5" />
-                        </span>
+                    {/* Content */}
+                    <div className="absolute inset-0 p-6 flex flex-col justify-end z-10">
+                      <div className="transform transition-transform duration-300 group-hover:-translate-y-2">
+                        <h3 className="text-white font-bold text-lg mb-2">{service.title}</h3>
+                        <p className="text-white/80 text-sm leading-relaxed transition-opacity duration-300 group-hover:opacity-0 line-clamp-3">
+                          {service.description}
+                        </p>
                       </div>
 
-                      {service.serviceCategories.length > 0 ? (
-                        <div className="absolute bottom-4 left-4 flex flex-wrap items-center gap-2 transition-opacity duration-300 group-hover:opacity-0">
-                          {service.serviceCategories.map((category) => (
-                            <span
-                              key={category}
-                              className="inline-block px-3 py-1 bg-accent/90 text-white font-semibold text-sm rounded"
-                            >
-                              {category}
-                            </span>
-                          ))}
-                        </div>
-                      ) : null}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <span className="text-primary font-bold flex items-center gap-2 text-sm bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full border border-primary/50">
+                          SCOPRI IL SERVIZIO <ArrowRight className="w-4 h-4" />
+                        </span>
+                      </div>
                     </div>
-                    <h2 className="text-3xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">
-                      {service.title}
-                    </h2>
-                  </Link>
-                  <p className="text-lg text-foreground/70 mb-6 leading-relaxed">{service.excerpt}</p>
-                </article>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="bg-primary/10 py-16">
+        <section className="bg-primary/10 py-32">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl font-bold text-foreground mb-6">Pronto a Resettare il Tuo Corpo?</h2>
             <p className="text-lg text-foreground/70 mb-8">

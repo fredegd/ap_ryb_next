@@ -69,7 +69,7 @@ export default async function AboutPage() {
 
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-secondary/30 to-background py-20">
+        <section className="bg-gradient-to-b from-secondary/30 to-background py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-5xl font-bold text-primary mb-6 text-center uppercase">{author.name}</h1>
             {author.slogan && (
@@ -92,7 +92,7 @@ export default async function AboutPage() {
         {/* About Content */}
         <section className="py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="space-y-12">
+            <div className="space-y-24">
 
               {/* Bio RichText */}
               <div>
@@ -101,7 +101,7 @@ export default async function AboutPage() {
 
               {/* Target Groups / Per Chi Lavoro */}
               {author.targetGroups && author.targetGroups.length > 0 && (
-                <div>
+                <div className="my-24">
                   <h2 className="text-3xl font-bold text-primary mb-6">Per Chi Lavoro</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {author.targetGroups.map((group, index) => (
