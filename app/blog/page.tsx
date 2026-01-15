@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { Newsletter } from "@/components/newsletter"
 import { getAllBlogPosts } from "@/lib/blog"
@@ -55,13 +56,28 @@ export default async function BlogPage() {
               {posts.map((post) => (
                 <article key={post.id} className="border-b border-border pb-12 last:border-b-0">
                   <Link href={`/blog/${post.slug}`} className="block group">
-                    <div className="relative h-64 mb-6 rounded-lg overflow-hidden">
+                    <div
+                      className="relative h-64 mb-6 rounded-lg overflow-hidden border-2 transition-colors duration-300"
+                      style={{ borderColor: post.categoryColor || 'transparent' }}
+                    >
                       <div
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
                         style={{ backgroundImage: `url(${post.image})` }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      <div className="absolute bottom-4 left-4 flex items-center space-x-4">
+                      <div
+                        className="absolute inset-0 opacity-30 transition-opacity duration-300"
+                        style={{ background: `linear-gradient(to bottom, transparent, ${post.categoryColor || 'transparent'})` }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-300 group-hover:opacity-80" />
+
+                      {/* Hover Overlay Content */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="text-white font-bold flex items-center gap-2 text-lg tracking-wide border-2 border-white/30 bg-black/20 backdrop-blur-sm px-6 py-2 rounded-full">
+                          LEGGI L'ARTICOLO <ArrowRight className="w-5 h-5" />
+                        </span>
+                      </div>
+
+                      <div className="absolute bottom-4 left-4 flex items-center space-x-4 transition-opacity duration-300 group-hover:opacity-0">
                         <span className="inline-block px-3 py-1 bg-accent/90 text-white font-semibold text-sm rounded">
                           {post.category}
                         </span>
@@ -73,11 +89,6 @@ export default async function BlogPage() {
                     </h2>
                   </Link>
                   <p className="text-lg text-foreground/70 mb-6 leading-relaxed">{post.excerpt}</p>
-                  <Link href={`/blog/${post.slug}`}>
-                    <button className="text-primary font-semibold hover:text-primary/80 transition-colors">
-                      Leggi Articolo →
-                    </button>
-                  </Link>
                 </article>
               ))}
             </div>

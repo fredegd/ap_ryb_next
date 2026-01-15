@@ -11,6 +11,7 @@ export interface BlogPost {
   id: string;
   title: string;
   category: string;
+  categoryColor?: string;
   date: string;
   publishDate: string;
   slug: string;
@@ -68,6 +69,25 @@ function getCategoryLabel(
   return labels.length ? labels.join(", ") : "Blog";
 }
 
+function getCategoryColor(
+  categoryLinks: ContentfulLink[] | undefined,
+  entriesById: ReturnType<typeof buildIncludesMap>["entriesById"]
+) {
+  if (!categoryLinks?.length) {
+    return undefined;
+  }
+
+  // Use the first category's color
+  for (const link of categoryLinks) {
+      const entry = resolveEntry(link, entriesById);
+      const color = entry?.fields?.color;
+      if (typeof color === "string") {
+          return color;
+      }
+  }
+  return undefined;
+}
+
 function mapBlogPost(
   item: { sys: { id: string }; fields: BlogPostFields },
   includes?: ReturnType<typeof buildIncludesMap>
@@ -86,6 +106,7 @@ function mapBlogPost(
     id: item.sys.id,
     title: item.fields.title,
     category: getCategoryLabel(item.fields.category, entriesById),
+    categoryColor: getCategoryColor(item.fields.category, entriesById),
     date: formatPublishDate(item.fields.publishDate),
     publishDate: item.fields.publishDate,
     slug: item.fields.slug,

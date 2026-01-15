@@ -1,6 +1,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { ArrowRight } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { getAllServices } from "@/lib/services"
 import { getAuthorById } from "@/lib/contentful"
@@ -59,14 +60,34 @@ export default async function ServiziPage() {
               {services.map((service) => (
                 <article key={service.id} className="border-b border-border pb-12 last:border-b-0">
                   <Link href={`/servizi/${service.slug}`} className="block group">
-                    <div className="relative h-64 mb-6 rounded-lg overflow-hidden">
+                    <div
+                      className="relative h-64 mb-6 rounded-lg overflow-hidden border-2 transition-colors duration-300"
+                      style={{ borderColor: service.categoryColor || 'transparent' }}
+                    >
+                      {/* Background Image */}
                       <div
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
                         style={{ backgroundImage: `url(${service.image})` }}
                       />
-                      <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+
+                      {/* Mild Color Overlay */}
+                      <div
+                        className="absolute inset-0 opacity-30 transition-opacity duration-300"
+                        style={{ background: `linear-gradient(to bottom, transparent, ${service.categoryColor || 'transparent'})` }}
+                      />
+
+                      {/* Dark Overlay for Text Readability */}
+                      <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent transition-opacity duration-300 group-hover:opacity-80" />
+
+                      {/* Hover Overlay Content */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="text-white font-bold flex items-center gap-2 text-lg tracking-wide border-2 border-white/30 bg-black/20 backdrop-blur-sm px-6 py-2 rounded-full">
+                          SCOPRI IL SERVIZIO <ArrowRight className="w-5 h-5" />
+                        </span>
+                      </div>
+
                       {service.serviceCategories.length > 0 ? (
-                        <div className="absolute bottom-4 left-4 flex flex-wrap items-center gap-2">
+                        <div className="absolute bottom-4 left-4 flex flex-wrap items-center gap-2 transition-opacity duration-300 group-hover:opacity-0">
                           {service.serviceCategories.map((category) => (
                             <span
                               key={category}
@@ -83,11 +104,6 @@ export default async function ServiziPage() {
                     </h2>
                   </Link>
                   <p className="text-lg text-foreground/70 mb-6 leading-relaxed">{service.excerpt}</p>
-                  <Link href={`/servizi/${service.slug}`}>
-                    <button className="text-primary font-semibold hover:text-primary/80 transition-colors">
-                      Scopri il Servizio →
-                    </button>
-                  </Link>
                 </article>
               ))}
             </div>

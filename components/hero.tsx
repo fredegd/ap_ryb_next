@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-background to-secondary/20 py-32 md:py-48">
@@ -14,9 +16,9 @@ export function Hero() {
         <p className="text-lg text-foreground/70 mb-12 max-w-2xl mx-auto">
           Alessandro Paradiso | Massoterapia | Chinesiologia
         </p>
-        <button className="px-8 py-3 border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-primary-foreground transition-colors duration-300">
+        <Link href="/servizi" className="px-8 py-3 border-2 border-primary rounded-md text-primary font-semibold hover:bg-primary hover:text-primary-foreground transition-colors duration-300 inline-block">
           SCOPRI I SERVIZI
-        </button>
+        </Link>
       </div>
     </section>
   )
