@@ -24,16 +24,16 @@ module.exports = function (migration) {
     .validations([{ unique: true }]);
 
   author.createField('profileImage')
-    .name('Profile image')
+    .name('Profile Image')
     .type('Link')
     .linkType('Asset');
 
   author.createField('jobTitle')
-    .name('Title/Position')
+    .name('Titel/Position')
     .type('Symbol');
 
   author.createField('bio')
-    .name('Bio')
+    .name('Biography')
     .type('Text');
 
   author.createField('email')
@@ -41,13 +41,26 @@ module.exports = function (migration) {
     .type('Symbol')
     .validations([{ regexp: { pattern: '^\\w[\\w.-]*@([\\w-]+\\.)+[\\w-]+$' } }]);
 
+  author.createField('phone')
+    .name('Phone')
+    .type('Symbol');
+
   author.createField('socialLinks')
-    .name('Social links')
+    .name('Social Links')
     .type('Object');
+
+  author.createField('targetGroups')
+    .name('Target Groups')
+    .type('Array')
+    .items({
+      type: 'Link',
+      linkType: 'Entry',
+      validations: [{ linkContentType: ['targetGroup'] }]
+    });
 
   // 2. CATEGORY Content Type
   const category = migration.createContentType('category')
-    .name('Category')
+    .name('Blog Category')
     .displayField('name')
     .description('Categorie del blog');
 
@@ -94,6 +107,11 @@ module.exports = function (migration) {
     .name('Icon')
     .type('Symbol');
 
+  serviceCategory.createField('color')
+    .name('Color')
+    .type('Symbol')
+    .validations([{ regexp: { pattern: '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$' } }]);
+
   serviceCategory.createField('description')
     .name('Description')
     .type('Text');
@@ -129,18 +147,18 @@ module.exports = function (migration) {
     .description('Recensioni dei clienti');
 
   testimonial.createField('customerName')
-    .name('Customer name')
+    .name('Kundenname')
     .type('Symbol')
     .required(true);
 
   testimonial.createField('rating')
-    .name('Rating')
+    .name('Bewertung')
     .type('Integer')
     .required(true)
     .validations([{ range: { min: 1, max: 5 } }]);
 
   testimonial.createField('testimonialText')
-    .name('Testimonial text')
+    .name('Testimonial Text')
     .type('Text')
     .required(true);
 
@@ -151,11 +169,11 @@ module.exports = function (migration) {
     .validations([{ linkContentType: ['service'] }]);
 
   testimonial.createField('date')
-    .name('Date')
+    .name('Datum')
     .type('Date');
 
   testimonial.createField('customerPhoto')
-    .name('Photo')
+    .name('Foto')
     .type('Link')
     .linkType('Asset');
 
@@ -171,7 +189,7 @@ module.exports = function (migration) {
     .description('Servizi e trattamenti');
 
   service.createField('serviceName')
-    .name('Service name')
+    .name('Service Name')
     .type('Symbol')
     .required(true)
     .validations([{ unique: true }]);
@@ -186,12 +204,12 @@ module.exports = function (migration) {
     ]);
 
   service.createField('metaDescription')
-    .name('Meta description')
+    .name('Meta Description')
     .type('Symbol')
     .validations([{ size: { max: 160 } }]);
 
   service.createField('heroImage')
-    .name('Hero image')
+    .name('Hero Image')
     .type('Link')
     .linkType('Asset')
     .required(true);
@@ -201,7 +219,7 @@ module.exports = function (migration) {
     .type('Symbol');
 
   service.createField('detailedDescription')
-    .name('Detailed description')
+    .name('Detailed Description')
     .type('RichText')
     .required(true);
 
@@ -211,7 +229,7 @@ module.exports = function (migration) {
     .required(true);
 
   service.createField('whoIsItFor')
-    .name('Who is it for?')
+    .name('Who is it for? (target group)')
     .type('RichText')
     .required(true);
 
@@ -221,7 +239,7 @@ module.exports = function (migration) {
     .required(true);
 
   service.createField('treatmentProcess')
-    .name('Treatment process')
+    .name('Treatment Process')
     .type('RichText');
 
   service.createField('contraindications')
@@ -229,7 +247,7 @@ module.exports = function (migration) {
     .type('RichText');
 
   service.createField('duration')
-    .name('Duration')
+    .name('Treatment Duration')
     .type('Symbol')
     .required(true);
 
@@ -238,7 +256,7 @@ module.exports = function (migration) {
     .type('Number');
 
   service.createField('priceDescription')
-    .name('Price description')
+    .name('Price Description')
     .type('Symbol');
 
   service.createField('serviceCategory')
@@ -274,7 +292,7 @@ module.exports = function (migration) {
     });
 
   service.createField('relatedServices')
-    .name('Related services')
+    .name('Related Services')
     .type('Array')
     .items({
       type: 'Link',
@@ -283,7 +301,7 @@ module.exports = function (migration) {
     });
 
   service.createField('bookingLink')
-    .name('Booking link')
+    .name('Booking Link')
     .type('Symbol')
     .validations([{ regexp: { pattern: '^(ftp|http|https):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-\\/]))?$' } }]);
 
@@ -293,7 +311,7 @@ module.exports = function (migration) {
     .defaultValue({ 'en-US': false });
 
   service.createField('order')
-    .name('Order')
+    .name('order')
     .type('Integer');
 
   service.createField('status')
@@ -327,12 +345,12 @@ module.exports = function (migration) {
     ]);
 
   blogPost.createField('metaDescription')
-    .name('Meta description')
+    .name('Meta Description')
     .type('Symbol')
     .validations([{ size: { max: 160 } }]);
 
   blogPost.createField('featuredImage')
-    .name('Featured image')
+    .name('Featured Image')
     .type('Link')
     .linkType('Asset')
     .required(true);
@@ -364,7 +382,7 @@ module.exports = function (migration) {
     .items({ type: 'Symbol' });
 
   blogPost.createField('excerpt')
-    .name('Excerpt')
+    .name('Introduction')
     .type('Text')
     .required(true)
     .validations([{ size: { max: 300 } }]);
@@ -375,11 +393,11 @@ module.exports = function (migration) {
     .required(true);
 
   blogPost.createField('readingTime')
-    .name('Reading time')
+    .name('Reading Time ')
     .type('Integer');
 
   blogPost.createField('relatedServices')
-    .name('Related services')
+    .name('Related Services')
     .type('Array')
     .items({
       type: 'Link',
@@ -388,7 +406,7 @@ module.exports = function (migration) {
     });
 
   blogPost.createField('faqSection')
-    .name('FAQ section')
+    .name('FAQ Section')
     .type('Array')
     .items({
       type: 'Link',
@@ -488,4 +506,19 @@ module.exports = function (migration) {
   promoBanner.createField('endDate')
     .name('End date')
     .type('Date');
+
+  // 10. TARGET GROUP Content Type
+  const targetGroup = migration.createContentType('targetGroup')
+    .name('Target Group')
+    .displayField('name')
+    .description('Gruppi target per gli autori');
+
+  targetGroup.createField('name')
+    .name('Name')
+    .type('Symbol')
+    .required(true);
+
+  targetGroup.createField('targetingMethod')
+    .name('Targeting Method')
+    .type('Symbol');
 };

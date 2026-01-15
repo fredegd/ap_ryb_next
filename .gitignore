@@ -39,3 +39,6 @@ node_modules/
 content 
 /content 
 /content/*
+
+contentful-backup
+contentful-backup/*

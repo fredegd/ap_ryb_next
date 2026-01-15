@@ -73,6 +73,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "contentful-export": "^7.22.0",
     "contentful-management": "^11.67.2",
     "postcss": "^8.5",
     "tailwindcss": "^4.1.9",
