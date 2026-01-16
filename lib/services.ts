@@ -27,14 +27,16 @@ export interface Service {
   metaDescription?: string;
   serviceCategories: string[];
   categoryColor?: string;
+  categories: { name: string; color?: string }[];
   gallery: string[];
   testimonials: any[]; // refine type if possible later
   faqs: any[]; // refine type if possible later
   relatedServices: any[]; // refine type if possible later
   bookingLink?: string;
+  isFeatured: boolean;
 }
 
-type ServiceFields = {
+export type ServiceFields = {
   serviceName: string;
   slug: string;
   metaDescription?: string;
@@ -57,9 +59,10 @@ type ServiceFields = {
   order?: number;
   status?: string;
   serviceCategory?: ContentfulLink[];
+  isFeatured?: boolean;
 };
 
-function mapService(
+export function mapService(
   item: { sys: { id: string }; fields: ServiceFields },
   includes?: ReturnType<typeof buildIncludesMap>
 ): Service {
@@ -70,23 +73,21 @@ function mapService(
 
   const imageUrl = resolveAssetUrl(item.fields.heroImage, assetsById);
   const metaDescription = item.fields.metaDescription ?? "";
-  const categoryNames =
-    item.fields.serviceCategory
+  
+  const rawCategories = item.fields.serviceCategory
       ?.map((link) => resolveEntry(link, entriesById))
-      .map((entry) => entry?.fields?.name as string | undefined)
-      .filter((name): name is string => Boolean(name)) ?? [];
+      .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry))
+      .map((entry) => ({
+          name: entry.fields.name as string,
+          color: entry.fields.color as string | undefined
+      }))
+      .filter((cat) => Boolean(cat.name)) ?? [];
 
-  const getCategoryColor = (
-    categoryLinks: ContentfulLink[] | undefined
-  ) => {
-    if (!categoryLinks?.length) return undefined;
-    for (const link of categoryLinks) {
-      const entry = resolveEntry(link, entriesById);
-      const color = entry?.fields?.color;
-      if (typeof color === 'string') return color;
-    }
-    return undefined;
-  };
+
+  const categoryNames = rawCategories.map(c => c.name);
+
+  // Backward compatibility: use the first category's color if available
+  const categoryColor = rawCategories[0]?.color;
 
   const galleryUrls =
   item.fields.gallery
@@ -120,12 +121,14 @@ function mapService(
     priceDescription: item.fields.priceDescription,
     metaDescription: item.fields.metaDescription,
     serviceCategories: categoryNames,
-    categoryColor: getCategoryColor(item.fields.serviceCategory),
+    categoryColor: categoryColor,
+    categories: rawCategories,
     gallery: galleryUrls,
     testimonials: mapLinkedEntries(item.fields.testimonials),
     faqs: mapLinkedEntries(item.fields.faqs),
     relatedServices: mapLinkedEntries(item.fields.relatedServices),
     bookingLink: item.fields.bookingLink,
+    isFeatured: item.fields.isFeatured || false,
   };
 }
 
@@ -135,6 +138,19 @@ export async function getAllServices(): Promise<Service[]> {
     include: 2,
     order: "fields.order",
     "fields.status": "Active",
+  });
+
+  const includes = buildIncludesMap(response.includes);
+  return response.items.map((item) => mapService(item, includes));
+}
+
+export async function getFeaturedServices(): Promise<Service[]> {
+  const response = await contentfulFetch<ServiceFields>("/entries", {
+    content_type: "service",
+    include: 2,
+    order: "-sys.createdAt",
+    "fields.status": "Active",
+    "fields.isFeatured": true,
   });
 
   const includes = buildIncludesMap(response.includes);

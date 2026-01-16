@@ -176,12 +176,6 @@ module.exports = function (migration) {
     .type('Text')
     .required(true);
 
-  testimonial.createField('relatedService')
-    .name('Service')
-    .type('Link')
-    .linkType('Entry')
-    .validations([{ linkContentType: ['service'] }]);
-
   testimonial.createField('date')
     .name('Datum')
     .type('Date');

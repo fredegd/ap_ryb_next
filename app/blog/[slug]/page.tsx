@@ -5,6 +5,8 @@ import { Newsletter } from "@/components/newsletter"
 import { getBlogPostBySlug, getBlogPostSlugs } from "@/lib/blog"
 import { notFound } from "next/navigation"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { ServiceCard } from "@/components/service-card"
+import { Clock } from "lucide-react"
 
 interface PageProps {
     params: {
@@ -92,10 +94,18 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
                         <div className="max-w-4xl mx-auto w-full">
                             <div className="mb-4 flex items-center space-x-4">
-                                <span className="inline-block px-3 py-1 bg-accent/90 text-accent-foreground font-semibold text-sm rounded">
+                                <span className="inline-block px-3 py-1 text-accent-foreground font-semibold text-sm rounded"
+                                    style={{ backgroundColor: post.categoryColor || 'transparent' }}
+                                >
                                     {post.category}
                                 </span>
                                 <span className="text-sm text-white/80">{post.date}</span>
+                                {post.readingTime && (
+                                    <span className="flex items-center text-sm text-white/80 gap-1">
+                                        <Clock className="w-4 h-4" />
+                                        {post.readingTime} min
+                                    </span>
+                                )}
                             </div>
                             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{post.title}</h1>
                         </div>
@@ -125,6 +135,22 @@ export default async function BlogPostPage({ params }: PageProps) {
                         </div>
                     </div>
                 </section>
+
+                {/* Related Services */}
+                {post.relatedServices && post.relatedServices.length > 0 && (
+                    <section className="py-12 bg-secondary/20">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-3xl font-bold text-center mb-10 text-primary">
+                                Servizi Correlati
+                            </h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                {post.relatedServices.map((service) => (
+                                    <ServiceCard key={service.id} service={service} />
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                )}
 
                 {/* Newsletter Section */}
                 <Newsletter />

@@ -6,6 +6,7 @@ import {
   resolveEntry,
   type ContentfulLink,
 } from "./contentful";
+import { type Service, mapService } from "./services";
 
 export interface BlogPost {
   id: string;
@@ -18,6 +19,9 @@ export interface BlogPost {
   image: string;
   excerpt: string;
   content: Document;
+  isFeatured: boolean;
+  relatedServices: Service[];
+  readingTime?: number;
 }
 
 type BlogPostFields = {
@@ -33,6 +37,8 @@ type BlogPostFields = {
   content: Document;
   readingTime?: number;
   status?: string;
+  isFeatured?: boolean;
+  relatedServices?: ContentfulLink[];
 };
 
 function formatPublishDate(publishDate: string) {
@@ -113,6 +119,19 @@ function mapBlogPost(
     image: imageUrl ?? "/opengraph-image.png",
     excerpt: item.fields.excerpt,
     content: item.fields.content,
+    isFeatured: item.fields.isFeatured || false,
+    readingTime: item.fields.readingTime,
+    relatedServices: item.fields.relatedServices
+      ?.map((link) => {
+        const entry = resolveEntry(link, entriesById);
+        // Check deeply for nested properties to avoid TS errors
+        if (entry?.sys?.contentType?.sys?.id === "service") {
+            // @ts-ignore - entry structure matches mapService expectation but types are loose
+            return mapService(entry as any, includes);
+        }
+        return null;
+      })
+      .filter((s): s is Service => s !== null) ?? [],
   };
 }
 
@@ -122,6 +141,20 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
     include: 2,
     order: "-fields.publishDate",
     "fields.status": "Published",
+  });
+
+  const includes = buildIncludesMap(response.includes);
+
+  return response.items.map((item) => mapBlogPost(item, includes));
+}
+
+export async function getFeaturedBlogPosts(): Promise<BlogPost[]> {
+  const response = await contentfulFetch<BlogPostFields>("/entries", {
+    content_type: "blogPost",
+    include: 2,
+    order: "-fields.publishDate",
+    "fields.status": "Published",
+    "fields.isFeatured": true,
   });
 
   const includes = buildIncludesMap(response.includes);

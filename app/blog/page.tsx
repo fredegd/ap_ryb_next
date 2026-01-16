@@ -58,7 +58,6 @@ export default async function BlogPage() {
                   <Link href={`/blog/${post.slug}`} className="block group">
                     <div
                       className="relative h-64 mb-6 rounded-lg overflow-hidden border-2 transition-colors duration-300"
-                      style={{ borderColor: post.categoryColor || 'transparent' }}
                     >
                       <div
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
@@ -72,13 +71,15 @@ export default async function BlogPage() {
 
                       {/* Hover Overlay Content */}
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="text-white font-bold flex items-center gap-2 text-lg tracking-wide border-2 border-white/30 bg-black/20 backdrop-blur-sm px-6 py-2 rounded-full">
+                        <span className="text-white font-bold flex items-center gap-2 text-lg tracking-wide border-2 border-white/30 bg-black/20 backdrop-blur-sm px-6 py-2 rounded-lg">
                           LEGGI L'ARTICOLO <ArrowRight className="w-5 h-5" />
                         </span>
                       </div>
 
                       <div className="absolute bottom-4 left-4 flex items-center space-x-4 transition-opacity duration-300 group-hover:opacity-0">
-                        <span className="inline-block px-3 py-1 bg-accent/90 text-white font-semibold text-sm rounded">
+                        <span className="inline-block px-3 py-1  text-white font-semibold text-sm rounded"
+                          style={{ backgroundColor: post.categoryColor || 'transparent' }}
+                        >
                           {post.category}
                         </span>
                         <span className="text-sm text-white/90">{post.date}</span>

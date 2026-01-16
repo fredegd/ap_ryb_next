@@ -26,17 +26,17 @@ export async function Footer() {
             <h4 className="font-semibold mb-4">Servizi</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/80">
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <a href="/servizi/#massoterapia" className="hover:text-primary-foreground transition-colors">
                   Massoterapia
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <a href="/servizi/#chinesiologia" className="hover:text-primary-foreground transition-colors">
                   Chinesiologia
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <a href="/servizi/#sport" className="hover:text-primary-foreground transition-colors">
                   Personal Training
                 </a>
               </li>
