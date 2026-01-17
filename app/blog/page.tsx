@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'it_IT',
-    url: 'https://resetyourbody.ch/blog',
+    url: 'https://resetyourbody.it/blog',
     siteName: 'Reset Your Body',
     title: 'Blog - Reset Your Body',
     description: 'Leggi gli ultimi articoli su wellness, training e recupero fisico',

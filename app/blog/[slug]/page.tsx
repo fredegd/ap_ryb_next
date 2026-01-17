@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps) {
         openGraph: {
             type: 'article',
             locale: 'it_IT',
-            url: `https://resetyourbody.ch/blog/${slug}`,
+            url: `https://resetyourbody.it/blog/${slug}`,
             siteName: 'Reset Your Body',
             title: post.title,
             description: post.excerpt,

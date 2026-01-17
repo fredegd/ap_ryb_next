@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'it_IT',
-    url: 'https://resetyourbody.ch/servizi',
+    url: 'https://resetyourbody.it/servizi',
     siteName: 'Reset Your Body',
     title: 'Servizi - Reset Your Body',
     description: 'Scopri i percorsi benessere offerti da Alessandro Paradiso',

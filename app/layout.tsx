@@ -28,11 +28,11 @@ export const metadata: Metadata = {
   title: "Reset Your Body",
   description: "Professional massage therapy and wellness services",
   generator: "",
-  metadataBase: new URL('https://resetyourbody.ch'),
+  metadataBase: new URL('https://resetyourbody.it'),
   openGraph: {
     type: 'website',
     locale: 'it_IT',
-    url: 'https://resetyourbody.ch',
+    url: 'https://resetyourbody.it',
     siteName: 'Reset Your Body',
     title: 'Reset Your Body',
     description: 'Professional massage therapy and wellness services',
