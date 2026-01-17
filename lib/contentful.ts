@@ -144,6 +144,17 @@ export type AuthorFields = {
   bookingLink?: string;
 };
 
+export type PageSettingsFields = {
+  pageName: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroImage?: ContentfulLink;
+  ctaText?: string;
+  ctaLink?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+};
+
 export async function getAuthorById(id: string) {
   const response = await contentfulFetch<AuthorFields>(
     `/entries`,
@@ -194,4 +205,17 @@ export async function getAuthorContactDetails(id: string) {
   }
 
   return authorEntry.fields;
+}
+
+export async function getPageSettings(pageName: string) {
+  const response = await contentfulFetch<PageSettingsFields>(
+    `/entries`,
+    {
+      content_type: "pageSettings",
+      "fields.pageName": pageName,
+      include: 1,
+    }
+  );
+
+  return response.items[0]?.fields;
 }

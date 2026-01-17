@@ -6,7 +6,16 @@ import { Footer } from "@/components/footer"
 import { BackgroundAnimation } from "@/components/BackgroundAnimation"
 import { getFeaturedServices } from "@/lib/services"
 import { getFeaturedBlogPosts } from "@/lib/blog"
-import { getAuthorById } from "@/lib/contentful"
+import { getAuthorById, getPageSettings } from "@/lib/contentful"
+import type { Metadata } from "next"
+
+export async function generateMetadata(): Promise<Metadata> {
+  const pageSettings = await getPageSettings("AP-Massoterapia - Home")
+  return {
+    title: pageSettings?.seoTitle || "Reset Your Body",
+    description: pageSettings?.seoDescription || "Professional massage therapy and wellness services",
+  }
+}
 
 export default async function Home() {
   const services = (await getFeaturedServices()).slice(0, 4)

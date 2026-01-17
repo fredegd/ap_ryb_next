@@ -453,8 +453,8 @@ module.exports = function (migration) {
     .type('Symbol');
 
   pageSettings.createField('heroSubtitle')
-    .name('Hero subtitle')
-    .type('Text');
+    .name('Hero Subtitle')
+    .type('Symbol');
 
   pageSettings.createField('heroImage')
     .name('Hero image')
