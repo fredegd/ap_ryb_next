@@ -12,8 +12,8 @@ import type { Metadata } from "next"
 export async function generateMetadata(): Promise<Metadata> {
   const pageSettings = await getPageSettings("AP-Massoterapia - Home")
   return {
-    title: pageSettings?.seoTitle || "Reset Your Body",
-    description: pageSettings?.seoDescription || "Professional massage therapy and wellness services",
+    title: pageSettings?.seoTitle || " Alessandro Paradiso Massoterapia Chinesiologia",
+    description: pageSettings?.seoDescription || "Studio Professionale di Massoterapia e Chinesiologia gestito da Alessandro Paradiso",
   }
 }
 
