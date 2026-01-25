@@ -118,7 +118,7 @@ export default async function ServiziPage() {
                       align: "center",
                       loop: true,
                     }}
-                    className="w-full relative"
+                    className="w-full relative group/carousel"
                   >
                     <CarouselContent className="-ml-4">
                       {section.services.map((service) => (
@@ -128,7 +128,7 @@ export default async function ServiziPage() {
                         >
                           <Link href={`/servizi/${service.slug}`}>
                             <div
-                              className="group relative overflow-hidden rounded-lg h-96 cursor-pointer transition-colors duration-300 bg-background"
+                              className="group group/card relative overflow-hidden rounded-lg h-96 cursor-pointer transition-[filter,opacity,transform,color] duration-300 bg-background shadow-md shadow-primary group-hover/carousel:grayscale group-hover/carousel:opacity-60 hover:grayscale-0! hover:opacity-100!"
                             >
                               {/* Service image */}
                               <Image
@@ -139,7 +139,9 @@ export default async function ServiziPage() {
                               />
 
                               {/* Overlay */}
-                              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70 group-hover:to-black/80 transition-all duration-300"></div>
+                              <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/70 group-hover:to-black/80 transition-all duration-300"></div>
+                              <div className="absolute inset-0 pointer-events-none shadow-[inset_5px_-5px_10px_0_rgba(0,0,0,0.55),inset_-5px_5px_10px_5px_rgba(255,255,255,0.55)]"></div>
+                              <div className="absolute inset-0 z-20 opacity-0 transition-opacity duration-200 pointer-events-none group-hover/carousel:opacity-100 group-hover/carousel:pointer-events-auto hover:opacity-0! hover:pointer-events-none!"></div>
 
                               {/* Content */}
                               <div className="absolute inset-0 p-6 flex flex-col justify-end">
@@ -161,12 +163,12 @@ export default async function ServiziPage() {
                         </CarouselItem>
                       ))}
                     </CarouselContent>
-                    <CarouselPrevious className={`hidden md:flex left-4 z-30 w-16 h-8 dark:hover:bg-accent dark:hover:text-accent-foreground ${section.services.length <= 3 ? "lg:hidden" : ""}`} />
-                    <CarouselNext className={`hidden md:flex right-4 z-30 w-16 h-8 dark:hover:bg-accent dark:hover:text-accent-foreground ${section.services.length <= 3 ? "lg:hidden" : ""}`} />
+                    <CarouselPrevious className={`absolute hidden md:flex left-4 z-40 w-16 h-8 dark:hover:bg-accent dark:hover:text-accent-foreground ${section.services.length <= 3 ? "lg:hidden" : ""}`} />
+                    <CarouselNext className={`absolute hidden md:flex right-4 z-40 w-16 h-8 dark:hover:bg-accent dark:hover:text-accent-foreground ${section.services.length <= 3 ? "lg:hidden" : ""}`} />
 
                     {/* Gradient Overlays for Desktop/Tablet */}
-                    <div className="hidden md:block absolute left-0 top-0 bottom-0 z-20 pointer-events-none w-[10%] bg-gradient-to-r from-background to-transparent" />
-                    <div className="hidden md:block absolute right-0 top-0 bottom-0 z-20 pointer-events-none w-[10%] bg-gradient-to-l from-background to-transparent" />
+                    <div className="hidden md:block absolute left-0 top-0 bottom-0 z-20 pointer-events-none w-[10%] bg-linear-to-r from-background to-transparent" />
+                    <div className="hidden md:block absolute right-0 top-0 bottom-0 z-20 pointer-events-none w-[10%] bg-linear-to-l from-background to-transparent" />
                   </Carousel>
                 </div>
               </section>
