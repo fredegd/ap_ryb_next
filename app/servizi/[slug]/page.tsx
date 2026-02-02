@@ -81,10 +81,10 @@ export default async function ServicePage({ params }: PageProps) {
     const richContent = documentToReactComponents(service.content)
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen ">
             <main>
                 {/* Hero Section with Image */}
-                <section className="relative w-full h-96 md:h-[500px]">
+                <section className="relative w-full h-96 md:h-[500px] ">
                     <Image
                         src={service.image}
                         alt={service.title}
@@ -98,7 +98,7 @@ export default async function ServicePage({ params }: PageProps) {
                     {/* Content Overlay */}
                     <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
                         <div className="max-w-4xl mx-auto w-full">
-                            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{service.title}</h1>
+                            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 ">{service.title}</h1>
                             <p className="text-lg text-white/90">{service.excerpt}</p>
                         </div>
                     </div>
@@ -143,7 +143,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {service.whoIsItFor && (
                             <div className="mb-16 bg-secondary/10 rounded-2xl">
                                 <h2 className="text-3xl font-bold mb-6">Per Chi È Indicato</h2>
-                                <div className="prose prose-invert max-w-none text-foreground/80">
+                                <div className="prose prose-invert max-w-none text-foreground/80 ">
                                     {documentToReactComponents(service.whoIsItFor)}
                                 </div>
                             </div>
