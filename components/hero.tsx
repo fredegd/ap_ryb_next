@@ -2,7 +2,32 @@
 
 import Link from "next/link"
 
-export function Hero() {
+interface HeroProps {
+  title?: string
+  subtitle?: string
+  ctaText?: string
+  ctaLink?: string
+}
+
+export function Hero({
+  // Default values serve as fallbacks if CMS data is missing or fails to load
+  title = "RESET YOUR BODY",
+  subtitle = "Alessandro Paradiso | Massoterapia | Chinesiologia",
+  ctaText = "SCOPRI I SERVIZI",
+  ctaLink = "/servizi"
+}: HeroProps) {
+
+  // Logic to split title after the first word
+  const splitTitle = (text: string) => {
+    const parts = text.trim().split(" ")
+    if (parts.length === 0) return { first: "", rest: "" }
+    const first = parts[0]
+    const rest = parts.slice(1).join(" ")
+    return { first, rest }
+  }
+
+  const { first: titleFirst, rest: titleRest } = splitTitle(title)
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-background to-secondary/20 py-32 md:py-48 min-h-[80dvh] flex items-center">
       {/* Decorative blur circles */}
@@ -11,13 +36,13 @@ export function Hero() {
       <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10 dark:opacity-30"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 ">
-        <h1 className="text-6xl md:text-7xl font-bold mb-8 text-accent">RESET</h1>
-        <h2 className="text-4xl md:text-5xl font-light text-muted-foreground mb-8">YOUR BODY</h2>
-        <p className="text-lg text-foreground/70 mb-12 max-w-2xl mx-auto">
-          Alessandro Paradiso | Massoterapia | Chinesiologia
+        <h1 className="text-6xl md:text-7xl font-bold mb-8 ">{titleFirst}</h1>
+        {titleRest && <h2 className="text-6xl md:text-7xl font-bold mb-8 text-accent">{titleRest}</h2>}
+        <p className="text-lg text-foreground/70 font-tan-mon-chery mb-12 max-w-2xl mx-auto">
+          {subtitle}
         </p>
-        <Link href="/servizi" className="px-8 py-3 border-2 border-primary rounded-md text-primary font-semibold hover:bg-primary hover:text-primary-foreground transition-colors duration-300 inline-block">
-          SCOPRI I SERVIZI
+        <Link href={ctaLink} className="px-8 py-3 border-2 border-primary rounded-md text-primary font-semibold hover:bg-primary hover:text-primary-foreground transition-colors duration-300 inline-block">
+          {ctaText}
         </Link>
       </div>
     </section>

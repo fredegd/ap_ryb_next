@@ -10,7 +10,7 @@ import { getAuthorById, getPageSettings } from "@/lib/contentful"
 import type { Metadata } from "next"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const pageSettings = await getPageSettings("AP-Massoterapia - Home")
+  const pageSettings = await getPageSettings("Home")
   return {
     title: pageSettings?.seoTitle || " Alessandro Paradiso Massoterapia Chinesiologia",
     description: pageSettings?.seoDescription || "Studio Professionale di Massoterapia e Chinesiologia gestito da Alessandro Paradiso",
@@ -20,6 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const services = (await getFeaturedServices()).slice(0, 4)
   const posts = (await getFeaturedBlogPosts()).slice(0, 4)
+  const pageSettings = await getPageSettings("Home")
 
   const authorId = process.env.AUTHOR_ENTRY_ID || ""
   const author = await getAuthorById(authorId)
@@ -27,7 +28,12 @@ export default async function Home() {
   return (
     <div className="min-h-screen">
       <BackgroundAnimation />
-      <Hero />
+      <Hero
+        title={pageSettings?.heroTitle}
+        subtitle={pageSettings?.heroSubtitle}
+        ctaText={pageSettings?.ctaText}
+        ctaLink={pageSettings?.ctaLink}
+      />
       <About
         name={author?.name ?? "Alessandro Paradiso"}
         slogan={author?.slogan}
