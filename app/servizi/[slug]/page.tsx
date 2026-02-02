@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer"
 import { getServiceBySlug, getServiceSlugs } from "@/lib/services"
 import { notFound } from "next/navigation"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { BLOCKS } from "@contentful/rich-text-types"
 import { Clock, Tag, CheckCircle, Info, AlertTriangle } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Card, CardContent } from "@/components/ui/card"
@@ -19,6 +20,13 @@ interface PageProps {
     params: {
         slug: string
     }
+}
+
+const richTextOptions = {
+    renderNode: {
+        [BLOCKS.HEADING_2]: (node: any, children: any) => <h2 className="text-3xl font-bold mb-6 flex items-center font-tan-mon-chery">{children}</h2>,
+        [BLOCKS.PARAGRAPH]: (node: any, children: any) => <p className="font-outfit mb-4">{children}</p>,
+    },
 }
 
 export const dynamicParams = true
@@ -78,7 +86,7 @@ export default async function ServicePage({ params }: PageProps) {
         notFound()
     }
 
-    const richContent = documentToReactComponents(service.content)
+    const richContent = documentToReactComponents(service.content, richTextOptions)
 
     return (
         <div className="min-h-screen ">
@@ -98,8 +106,8 @@ export default async function ServicePage({ params }: PageProps) {
                     {/* Content Overlay */}
                     <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
                         <div className="max-w-4xl mx-auto w-full">
-                            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 ">{service.title}</h1>
-                            <p className="text-lg text-white/90">{service.excerpt}</p>
+                            <h1 className="text-4xl md:text-5xl font-passionone font-bold text-white mb-4 ">{service.title}</h1>
+                            <p className="text-lg text-white/90 ">{service.excerpt}</p>
                         </div>
                     </div>
                 </section>
@@ -116,12 +124,12 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* How It Works */}
                         {service.howDoesItWork && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold mb-6 flex items-center">
+                                <h2 className="text-3xl font-bold mb-6 flex items-center font-tan-mon-chery">
                                     <Info className="w-8 h-8 text-primary mr-3" />
                                     Come Funziona
                                 </h2>
                                 <div className="prose prose-invert max-w-none text-foreground/80">
-                                    {documentToReactComponents(service.howDoesItWork)}
+                                    {documentToReactComponents(service.howDoesItWork, richTextOptions)}
                                 </div>
                             </div>
                         )}
@@ -129,12 +137,12 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Benefits */}
                         {service.benefits && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold mb-6 flex items-center">
+                                <h2 className="text-3xl font-bold mb-6 flex items-center font-tan-mon-chery">
                                     <CheckCircle className="w-8 h-8 text-primary mr-3" />
                                     Benefici
                                 </h2>
                                 <div className="prose prose-invert max-w-none text-foreground/80">
-                                    {documentToReactComponents(service.benefits)}
+                                    {documentToReactComponents(service.benefits, richTextOptions)}
                                 </div>
                             </div>
                         )}
@@ -142,9 +150,9 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Who Is It For */}
                         {service.whoIsItFor && (
                             <div className="mb-16 bg-secondary/10 rounded-2xl">
-                                <h2 className="text-3xl font-bold mb-6">Per Chi È Indicato</h2>
+                                <h2 className="text-3xl font-bold mb-6 font-tan-mon-chery">Per Chi È Indicato</h2>
                                 <div className="prose prose-invert max-w-none text-foreground/80 ">
-                                    {documentToReactComponents(service.whoIsItFor)}
+                                    {documentToReactComponents(service.whoIsItFor, richTextOptions)}
                                 </div>
                             </div>
                         )}
@@ -152,12 +160,12 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Contraindications */}
                         {service.contraindications && (
                             <div className="mb-16 border-l-4 border-destructive pl-6 py-1">
-                                <h2 className="text-2xl font-bold mb-4 flex items-center text-destructive">
+                                <h2 className="text-2xl font-bold mb-4 flex items-center text-destructive font-tan-mon-chery">
                                     <AlertTriangle className="w-6 h-6 mr-3" />
                                     Controindicazioni
                                 </h2>
                                 <div className="prose prose-invert max-w-none text-foreground/80">
-                                    {documentToReactComponents(service.contraindications)}
+                                    {documentToReactComponents(service.contraindications, richTextOptions)}
                                 </div>
                             </div>
                         )}
@@ -165,9 +173,9 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Treatment Process */}
                         {service.treatmentProcess && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold mb-6">Come Funziona il Trattamento</h2>
+                                <h2 className="text-3xl font-bold mb-6 font-tan-mon-chery">Come Funziona il Trattamento</h2>
                                 <div className="prose prose-invert max-w-none text-foreground/80">
-                                    {documentToReactComponents(service.treatmentProcess)}
+                                    {documentToReactComponents(service.treatmentProcess, richTextOptions)}
                                 </div>
                             </div>
                         )}
@@ -294,7 +302,7 @@ export default async function ServicePage({ params }: PageProps) {
                                         <AccordionItem key={idx} value={`item-${idx}`}>
                                             <AccordionTrigger>{faq.question}</AccordionTrigger>
                                             <AccordionContent className="prose prose-invert max-w-none text-foreground/80">
-                                                {documentToReactComponents(faq.answer)}
+                                                {documentToReactComponents(faq.answer, richTextOptions)}
                                             </AccordionContent>
                                         </AccordionItem>
                                     ))}
