@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Passion_One, Fira_Sans, Outfit } from "next/font/google"
+import localFont from "next/font/local"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Nav } from "react-day-picker"
@@ -22,6 +23,12 @@ const outfit = Outfit({
   weight: ['300', '400', '700', '800'],
   subsets: ["latin"],
   variable: "--font-outfit"
+})
+
+const tanMonChery = localFont({
+  src: "./fonts/TanMonChery.ttf",
+  variable: "--font-tan-mon-chery",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -77,7 +84,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${passionOne.variable} ${firaSans.variable} ${outfit.variable} font-outfit antialiased`}>
+      <body className={`${passionOne.variable} ${firaSans.variable} ${outfit.variable} ${tanMonChery.variable} font-outfit antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Navbar />
           {children}
