@@ -27,6 +27,8 @@ export function ServicesCarousel({ sectionName, services }: ServicesCarouselProp
     left: null,
     right: null,
   })
+  const [canScrollPrev, setCanScrollPrev] = React.useState(false)
+  const [canScrollNext, setCanScrollNext] = React.useState(false)
 
   const updateEdges = React.useCallback((embla: CarouselApi) => {
     const inView = embla.slidesInView()
@@ -35,6 +37,8 @@ export function ServicesCarousel({ sectionName, services }: ServicesCarouselProp
       return
     }
     setEdge({ left: inView[0], right: inView[inView.length - 1] })
+    setCanScrollPrev(embla.canScrollPrev())
+    setCanScrollNext(embla.canScrollNext())
   }, [])
 
   React.useEffect(() => {
@@ -53,7 +57,7 @@ export function ServicesCarousel({ sectionName, services }: ServicesCarouselProp
   }, [api, updateEdges])
 
   return (
-    <div className="relative overflow-x-hidden">
+    <div className="relative overflow-visible">
       <Carousel
         opts={{
           align: 'start',
@@ -64,16 +68,19 @@ export function ServicesCarousel({ sectionName, services }: ServicesCarouselProp
         setApi={setApi}
         className="w-full relative group/carousel"
       >
-        <div className="flex items-center gap-4 md:gap-6">
+        <div className="flex items-center gap-2">
           <CarouselPrevious
             variant="ghost"
             size="icon-lg"
-            className="!static !translate-y-0 !left-auto !right-auto !top-auto hidden md:flex h-[170px] sm:h-[190px] lg:h-[210px] w-12 shrink-0 rounded-2xl bg-black/55 text-white ring-1 ring-white/15 shadow-[0_10px_25px_rgba(0,0,0,0.35)] backdrop-blur-md hover:bg-black/70 hover:text-white z-30"
+            className={cn(
+              '!static !translate-y-0 !left-auto !right-auto !top-auto hidden md:flex h-[170px] sm:h-[190px] lg:h-[210px] w-12 shrink-0 rounded-l-2xl rounded-r-none bg-black/55 text-white ring-1 ring-white/15 shadow-[0_10px_25px_rgba(0,0,0,0.35)] backdrop-blur-md hover:bg-accent hover:text-accent-foreground z-30 transition-opacity duration-200 disabled:opacity-0',
+              !canScrollPrev && 'opacity-0 pointer-events-none',
+            )}
           />
 
-          <div className="relative flex-1 min-w-0">
+          <div className="relative flex-1 min-w-0" style={{ overflowX: 'clip' }}>
             <CarouselContent
-              containerClassName="overflow-x-hidden overflow-y-visible pb-20"
+              containerClassName="overflow-visible"
               className="-ml-4"
             >
               {services.map((service, index) => {
@@ -94,11 +101,11 @@ export function ServicesCarousel({ sectionName, services }: ServicesCarouselProp
                     <Link href={`/servizi/${service.slug}`}>
                       <div
                         className={cn(
-                          'group relative transition-transform duration-300 ease-out hover:-translate-y-1 hover:scale-[1.06] hover:z-30 will-change-transform',
+                          'group relative z-0 transition-transform duration-300 ease-out hover:-translate-y-4 hover:scale-[1.1] hover:z-50 will-change-transform',
                           edgeClass,
                         )}
                       >
-                        <div className="relative overflow-hidden rounded-2xl bg-background/5 ring-1 ring-white/10 shadow-[0_18px_40px_rgba(0,0,0,0.35)] transition-shadow duration-300 group-hover:shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
+                        <div className="relative overflow-hidden rounded-2xl bg-background/5 ring-1 ring-white/10 shadow-[0_18px_40px_rgba(0,0,0,0.35)] transition-shadow duration-300 group-hover:shadow-[0_30px_80px_rgba(0,0,0,0.55)] group-hover:rounded-b-none ">
                           <div className="relative h-[170px] sm:h-[190px] lg:h-[210px]">
                             <Image
                               src={service.image}
@@ -123,7 +130,7 @@ export function ServicesCarousel({ sectionName, services }: ServicesCarouselProp
                           </div>
                         </div>
 
-                        <div className="absolute left-0 right-0 top-full mt-2 rounded-2xl bg-[#121820]/90 backdrop-blur-md px-4 py-4 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+                        <div className="absolute left-0 right-0 top-full mt-0 rounded-b-2xl bg-[#121820]/90 backdrop-blur-md px-4 py-4 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
                           <p className="text-white/80 text-sm leading-relaxed line-clamp-2">
                             {service.description}
                           </p>
@@ -144,7 +151,10 @@ export function ServicesCarousel({ sectionName, services }: ServicesCarouselProp
           <CarouselNext
             variant="ghost"
             size="icon-lg"
-            className="!static !translate-y-0 !left-auto !right-auto !top-auto hidden md:flex h-[170px] sm:h-[190px] lg:h-[210px] w-12 shrink-0 rounded-2xl bg-black/55 text-white ring-1 ring-white/15 shadow-[0_10px_25px_rgba(0,0,0,0.35)] backdrop-blur-md hover:bg-black/70 hover:text-white z-30"
+            className={cn(
+              '!static !translate-y-0 !left-auto !right-auto !top-auto hidden md:flex h-[170px] sm:h-[190px] lg:h-[210px] w-12 shrink-0 rounded-r-2xl rounded-l-none bg-black/55 text-white ring-1 ring-white/15 shadow-[0_10px_25px_rgba(0,0,0,0.35)] backdrop-blur-md hover:bg-accent hover:text-accent-foreground z-30 transition-opacity duration-200 disabled:opacity-0',
+              !canScrollNext && 'opacity-0 pointer-events-none',
+            )}
           />
         </div>
       </Carousel>

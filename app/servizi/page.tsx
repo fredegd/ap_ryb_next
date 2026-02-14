@@ -39,7 +39,7 @@ export default async function ServiziPage() {
 
   return (
     <div className="min-h-screen">
-      <main>
+      <main className="overflow-x-clip">
         {/* Hero Section */}
         <section className="bg-linear-to-b from-secondary/30 to-background py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -93,11 +93,11 @@ export default async function ServiziPage() {
               <section
                 key={section.name}
                 id={section.name.toLowerCase().replace(/\s+/g, '-')}
-                className="py-20"
+                className="pt-14 pb-8 relative overflow-visible z-0 hover:z-20 transition-[z-index]"
               >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <h2
-                    className="text-3xl font-bold mb-10 drop-shadow-md inline-block border-b-4 pb-2"
+                    className="text-3xl font-bold mb-6 drop-shadow-md inline-block border-b-4 pb-2"
                     style={{ borderColor: section.color || 'var(--primary)' }}
                   >
                     {section.name.toUpperCase()}
