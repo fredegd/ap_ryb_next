@@ -1,11 +1,9 @@
 
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { getAllServices } from "@/lib/services"
 import { getAuthorById } from "@/lib/contentful"
 import type { Metadata } from "next"
+import { ServicesCarousel } from "@/components/servizi/services-carousel"
 
 export const metadata: Metadata = {
   title: "Servizi - Reset Your Body",
@@ -33,14 +31,6 @@ export const metadata: Metadata = {
     images: ['/opengraph-image.png'],
   },
 }
-
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
 
 export default async function ServiziPage() {
   const services = await getAllServices()
@@ -112,65 +102,8 @@ export default async function ServiziPage() {
                   >
                     {section.name.toUpperCase()}
                   </h2>
+                  <ServicesCarousel sectionName={section.name} services={section.services} />
                 </div>
-
-                <Carousel
-                  opts={{
-                    align: "center",
-                    loop: true,
-                  }}
-                  className="w-full relative group/carousel"
-                >
-                  <CarouselContent className="-ml-4">
-                    {section.services.map((service) => (
-                      <CarouselItem
-                        key={`${section.name}-${service.slug}`}
-                        className="pl-4 basis-[66.66%] md:basis-[40%] lg:basis-[28.57%]"
-                      >
-                        <Link href={`/servizi/${service.slug}`}>
-                          <div
-                            className="group group/card relative overflow-hidden rounded-lg h-96 cursor-pointer transition-[filter,opacity,transform,color] duration-300 bg-background shadow-md shadow-primary group-hover/carousel:grayscale group-hover/carousel:opacity-60 hover:grayscale-0! hover:opacity-100!"
-                          >
-                            {/* Service image */}
-                            <Image
-                              src={service.image}
-                              alt={service.title}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-
-                            {/* Overlay */}
-                            <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/70 group-hover:to-black/80 transition-all duration-300"></div>
-                            <div className="absolute inset-0 pointer-events-none shadow-[inset_5px_-5px_10px_0_rgba(0,0,0,0.55),inset_-5px_5px_10px_5px_rgba(255,255,255,0.55)]"></div>
-                            <div className="absolute inset-0 z-20 opacity-0 transition-opacity duration-200 pointer-events-none group-hover/carousel:opacity-100 group-hover/carousel:pointer-events-auto hover:opacity-0! hover:pointer-events-none!"></div>
-
-                            {/* Content */}
-                            <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                              <div className="transform transition-transform duration-300 group-hover:-translate-y-2">
-                                <h3 className="text-white font-bold text-lg mb-2">{service.title}</h3>
-                                <p className="text-white/80 text-sm leading-relaxed transition-opacity duration-300 group-hover:opacity-0 line-clamp-3">
-                                  {service.description}
-                                </p>
-                              </div>
-
-                              <div className="absolute inset-x-0 top-1/4 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                <span className="pointer-events-auto text-primary font-bold flex items-center gap-2 text-sm bg-black/40 group-hover:bg-accent group-hover:text-accent-foreground backdrop-blur-sm px-4 py-2 rounded-lg border border-primary/50 transition-colors">
-                                  SCOPRI IL SERVIZIO <ArrowRight className="w-4 h-4" />
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious className={`absolute hidden md:flex left-4 z-40 w-16 h-8 dark:hover:bg-accent dark:hover:text-accent-foreground ${section.services.length <= 3 ? "lg:hidden" : ""}`} />
-                  <CarouselNext className={`absolute hidden md:flex right-4 z-40 w-16 h-8 dark:hover:bg-accent dark:hover:text-accent-foreground ${section.services.length <= 3 ? "lg:hidden" : ""}`} />
-
-                  {/* Gradient Overlays for Desktop/Tablet */}
-                  <div className="hidden md:block absolute left-0 top-0 bottom-0 z-20 pointer-events-none w-[10%] bg-linear-to-r from-background to-transparent" />
-                  <div className="hidden md:block absolute right-0 top-0 bottom-0 z-20 pointer-events-none w-[10%] bg-linear-to-l from-background to-transparent" />
-                </Carousel>
               </section>
             ));
           })()}
