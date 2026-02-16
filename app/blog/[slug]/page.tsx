@@ -107,7 +107,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                     </span>
                                 )}
                             </div>
-                            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{post.title}</h1>
+                            <h1 className="text-4xl md:text-5xl font-passion-one font-normal text-white mb-4 uppercase tracking-wide">{post.title}</h1>
                         </div>
                     </div>
                 </section>
@@ -117,7 +117,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                         {/* Meta Info */}
                         <div className="mb-12 pb-8 border-b border-border">
-                            <p className="text-foreground/70 text-lg">{post.excerpt}</p>
+                            <p className="font-onest text-foreground/70 text-lg">{post.excerpt}</p>
                         </div>
 
                         {/* Article Content */}
@@ -140,7 +140,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 {post.relatedServices && post.relatedServices.length > 0 && (
                     <section className="py-12 bg-secondary/20">
                         <div className="max-w-8xl mx-auto xl:mx-34 px-4 sm:px-6 lg:px-8">
-                            <h2 className="text-3xl font-bold text-center mb-10 text-primary">
+                            <h2 className="text-3xl font-cormorant-garamond font-medium text-center mb-10 text-primary">
                                 Servizi Correlati
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

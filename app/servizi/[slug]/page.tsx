@@ -24,8 +24,8 @@ interface PageProps {
 
 const richTextOptions = {
     renderNode: {
-        [BLOCKS.HEADING_2]: (node: any, children: any) => <h2 className="text-3xl font-bold mb-6 flex items-center font-cormorant-garamond">{children}</h2>,
-        [BLOCKS.PARAGRAPH]: (node: any, children: any) => <p className="font-outfit mb-4">{children}</p>,
+        [BLOCKS.HEADING_2]: (node: any, children: any) => <h2 className="text-3xl font-cormorant-garamond font-medium mb-6 flex items-center">{children}</h2>,
+        [BLOCKS.PARAGRAPH]: (node: any, children: any) => <p className="font-onest mb-4">{children}</p>,
     },
 }
 
@@ -106,8 +106,8 @@ export default async function ServicePage({ params }: PageProps) {
                     {/* Content Overlay */}
                     <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
                         <div className="max-w-4xl mx-auto w-full">
-                            <h1 className="text-4xl md:text-5xl font-passionone font-bold text-white mb-4 ">{service.title}</h1>
-                            <p className="text-lg text-white/90 ">{service.excerpt}</p>
+                            <h1 className="text-4xl md:text-5xl font-passion-one font-normal text-white mb-4 uppercase tracking-wide">{service.title}</h1>
+                            <p className="text-lg font-onest text-white/90">{service.excerpt}</p>
                         </div>
                     </div>
                 </section>
@@ -124,7 +124,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* How It Works */}
                         {service.howDoesItWork && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold mb-6 flex items-center font-cormorant-garamond">
+                                <h2 className="text-3xl font-cormorant-garamond font-medium mb-6 flex items-center">
                                     <Info className="w-8 h-8 text-primary mr-3" />
                                     Come Funziona
                                 </h2>
@@ -137,7 +137,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Benefits */}
                         {service.benefits && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold mb-6 flex items-center font-cormorant-garamond">
+                                <h2 className="text-3xl font-cormorant-garamond font-medium mb-6 flex items-center">
                                     <CheckCircle className="w-8 h-8 text-primary mr-3" />
                                     Benefici
                                 </h2>
@@ -150,7 +150,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Who Is It For */}
                         {service.whoIsItFor && (
                             <div className="mb-16 bg-secondary/10 rounded-2xl">
-                                <h2 className="text-3xl font-bold mb-6 font-cormorant-garamond">Per Chi È Indicato</h2>
+                                <h2 className="text-3xl font-cormorant-garamond font-medium mb-6">Per Chi È Indicato</h2>
                                 <div className="prose prose-invert max-w-none text-foreground/80 ">
                                     {documentToReactComponents(service.whoIsItFor, richTextOptions)}
                                 </div>
@@ -160,7 +160,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Contraindications */}
                         {service.contraindications && (
                             <div className="mb-16 border-l-4 border-destructive pl-6 py-1">
-                                <h2 className="text-2xl font-bold mb-4 flex items-center text-destructive font-cormorant-garamond">
+                                <h2 className="text-2xl font-cormorant-garamond font-medium mb-4 flex items-center text-destructive">
                                     <AlertTriangle className="w-6 h-6 mr-3" />
                                     Controindicazioni
                                 </h2>
@@ -173,7 +173,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Treatment Process */}
                         {service.treatmentProcess && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold mb-6 font-cormorant-garamond">Come Funziona il Trattamento</h2>
+                                <h2 className="text-3xl font-cormorant-garamond font-medium mb-6">Come Funziona il Trattamento</h2>
                                 <div className="prose prose-invert max-w-none text-foreground/80">
                                     {documentToReactComponents(service.treatmentProcess, richTextOptions)}
                                 </div>
@@ -211,15 +211,15 @@ export default async function ServicePage({ params }: PageProps) {
 
                         {/* CTA Section (Moved) */}
                         <div className="py-12 bg-gradient-to-b from-background to-secondary/30 rounded-2xl mb-16 text-center px-6">
-                            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">Pronto a Iniziare il Tuo Reset?</h2>
-                            <p className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto">
+                            <h2 className="text-3xl md:text-4xl font-cormorant-garamond font-medium text-primary mb-6">Pronto a Iniziare il Tuo Reset?</h2>
+                            <p className="text-xl font-onest text-foreground/70 mb-8 max-w-2xl mx-auto">
                                 Scopri come posso aiutarti a raggiungere il tuo benessere fisico duraturo.
                             </p>
                             <a
                                 href={service.bookingLink || "https://calendly.com/your-booking-link"}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-background bg-primary hover:bg-primary/90 rounded-lg transition-colors"
+                                className="inline-flex items-center justify-center px-8 py-4 text-lg font-passion-one font-semibold text-background bg-primary hover:bg-primary/90 rounded-lg transition-colors uppercase tracking-wide"
                             >
                                 Prenota un Appuntamento
                             </a>
@@ -228,7 +228,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Gallery */}
                         {service.gallery && service.gallery.length > 0 && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold mb-8">Galleria</h2>
+                                <h2 className="text-3xl font-cormorant-garamond font-medium mb-8">Galleria</h2>
                                 <Carousel
                                     opts={{
                                         align: "start",
@@ -259,7 +259,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Testimonials */}
                         {service.testimonials && service.testimonials.length > 0 && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold mb-8">Dicono di noi</h2>
+                                <h2 className="text-3xl font-cormorant-garamond font-medium mb-8">Dicono di noi</h2>
                                 <div className="grid gap-6 md:grid-cols-2">
                                     {service.testimonials.map((testimonial: any, idx) => (
                                         <Card key={idx} className="bg-secondary/5">
@@ -296,7 +296,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* FAQs */}
                         {service.faqs && service.faqs.length > 0 && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold mb-6">Domande Frequenti</h2>
+                                <h2 className="text-3xl font-cormorant-garamond font-medium mb-6">Domande Frequenti</h2>
                                 <Accordion type="single" collapsible className="w-full">
                                     {service.faqs.map((faq: any, idx) => (
                                         <AccordionItem key={idx} value={`item-${idx}`}>

@@ -1,28 +1,33 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Passion_One, Outfit } from "next/font/google"
 import localFont from "next/font/local"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Nav } from "react-day-picker"
 import { Navbar } from "@/components/navbar"
 
-const passionOne = Passion_One({
-  weight: ['400', '700', '900'],
-  subsets: ["latin"],
-  variable: "--font-passion-one"
+// Display Font - Bold, Impactful Headings
+const passionOne = localFont({
+  src: "./fonts/PassionOne-Regular.ttf",
+  variable: "--font-passion-one",
+  display: "swap",
+  weight: "400",
 })
 
-const outfit = Outfit({
-  weight: ['300', '400', '700', '800'],
-  subsets: ["latin"],
-  variable: "--font-outfit"
-})
-
+// Elegant Serif - Content Headings & Accents
 const cormorantGaramond = localFont({
-  src: "./fonts/CormorantGaramond-Regular.ttf",
+  src: "./fonts/CormorantGaramond-Medium.ttf",
   variable: "--font-cormorant-garamond",
   display: "swap",
+  weight: "500",
+})
+
+// Body Font - Clean, Modern UI
+const onest = localFont({
+  src: "./fonts/Onest-Regular.ttf",
+  variable: "--font-onest",
+  display: "swap",
+  weight: "400",
 })
 
 export const metadata: Metadata = {
@@ -78,7 +83,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${passionOne.variable} ${outfit.variable} ${cormorantGaramond.variable} font-outfit antialiased`}>
+      <body className={`${passionOne.variable} ${cormorantGaramond.variable} ${onest.variable} font-onest antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Navbar />
           {children}

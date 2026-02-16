@@ -18,12 +18,12 @@ export async function Footer() {
       <div className="max-w-8xl mx-auto xl:mx-34 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
-            <h3 className="font-bold text-lg mb-4">Reset Your Body</h3>
-            <p className="text-primary-foreground/80">Professional wellness and therapeutic services</p>
+            <h3 className="font-passion-one font-normal text-xl mb-4 uppercase tracking-wide">Reset Your Body</h3>
+            <p className="font-onest text-primary-foreground/80">Professional wellness and therapeutic services</p>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Servizi</h4>
+            <h4 className="font-cormorant-garamond font-medium text-lg mb-4">Servizi</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/80">
               <li>
                 <a href="/servizi/#massoterapia" className="hover:text-primary-foreground transition-colors">
@@ -44,7 +44,7 @@ export async function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Contatti</h4>
+            <h4 className="font-cormorant-garamond font-medium text-lg mb-4">Contatti</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/80">
               {author?.email && (
                 <li className="flex items-center gap-2">

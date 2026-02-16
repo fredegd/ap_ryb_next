@@ -40,8 +40,8 @@ export function Newsletter() {
     return (
         <section className="bg-primary/10 py-16">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 className="text-3xl font-bold text-foreground mb-6">Rimani Aggiornato</h2>
-                <p className="text-lg text-foreground/70 mb-8">
+                <h2 className="text-3xl font-cormorant-garamond font-medium text-foreground mb-6">Rimani Aggiornato</h2>
+                <p className="text-lg font-onest text-foreground/70 mb-8">
                     Iscriviti alla newsletter per ricevere i nuovi articoli direttamente nella tua casella di posta.
                 </p>
                 <form onSubmit={handleSubmit} className="max-w-md mx-auto">
@@ -58,7 +58,7 @@ export function Newsletter() {
                         <button
                             type="submit"
                             disabled={status === "loading"}
-                            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-passion-one font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wide"
                         >
                             {status === "loading" ? "..." : "Iscriviti"}
                         </button>

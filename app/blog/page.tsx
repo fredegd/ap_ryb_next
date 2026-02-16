@@ -41,8 +41,8 @@ export default async function BlogPage() {
         {/* Hero Section */}
         <section className="bg-gradient-to-b from-secondary/30 to-background py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-5xl font-bold text-primary mb-6 text-center">DAL MIO BLOG</h1>
-            <p className="text-lg text-foreground/70 text-center max-w-2xl mx-auto">
+            <h1 className="text-5xl font-passion-one font-normal text-primary mb-6 text-center uppercase tracking-wide">Dal Mio Blog</h1>
+            <p className="text-lg font-onest text-foreground/70 text-center max-w-2xl mx-auto">
               Articoli e guide su wellness, training, e recupero fisico per aiutarti a ottenere il massimo dal tuo
               corpo.
             </p>
@@ -85,11 +85,11 @@ export default async function BlogPage() {
                         <span className="text-sm text-white/90">{post.date}</span>
                       </div>
                     </div>
-                    <h2 className="text-3xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">
+                    <h2 className="text-3xl font-cormorant-garamond font-medium text-foreground mb-4 group-hover:text-primary transition-colors">
                       {post.title}
                     </h2>
                   </Link>
-                  <p className="text-lg text-foreground/70 mb-6 leading-relaxed">{post.excerpt}</p>
+                  <p className="text-lg font-onest text-foreground/70 mb-6 leading-relaxed">{post.excerpt}</p>
                 </article>
               ))}
             </div>

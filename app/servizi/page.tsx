@@ -43,8 +43,8 @@ export default async function ServiziPage() {
         {/* Hero Section */}
         <section className="bg-linear-to-b from-secondary/30 to-background py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-5xl font-bold text-primary mb-6 text-center">PERCORSI BENESSERE</h1>
-            <p className="text-lg text-foreground/70 text-center max-w-2xl mx-auto">
+            <h1 className="text-5xl font-passion-one font-normal text-primary mb-6 text-center uppercase tracking-wide">Percorsi Benessere</h1>
+            <p className="text-lg font-onest text-foreground/70 text-center max-w-2xl mx-auto">
               Scopri i nostri servizi specializzati, progettati per aiutarti a raggiungere il massimo benessere fisico e
               mentale.
             </p>
@@ -97,7 +97,7 @@ export default async function ServiziPage() {
               >
                 <div className="max-w-8xl mx-auto xl:mx-34 px-4 sm:px-6 lg:px-8">
                   <h2
-                    className="text-3xl font-bold mb-6 drop-shadow-md inline-block border-b-4 pb-2"
+                    className="text-3xl font-cormorant-garamond font-medium mb-6 drop-shadow-md inline-block border-b-4 pb-2"
                     style={{ borderColor: section.color || 'var(--primary)' }}
                   >
                     {section.name.toUpperCase()}
@@ -112,15 +112,15 @@ export default async function ServiziPage() {
         {/* CTA Section */}
         <section className="bg-primary/10 py-32">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-6">Pronto a Resettare il Tuo Corpo?</h2>
-            <p className="text-lg text-foreground/70 mb-8">
+            <h2 className="text-3xl font-cormorant-garamond font-medium text-foreground mb-6">Pronto a Resettare il Tuo Corpo?</h2>
+            <p className="text-lg font-onest text-foreground/70 mb-8">
               Contattami per prenotare la tua prima sessione di consulenza.
             </p>
             <a
               href={author?.bookingLink || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-block"
+              className="bg-primary text-primary-foreground px-8 py-4 rounded-lg font-passion-one font-semibold hover:bg-primary/90 transition-colors inline-block uppercase tracking-wide"
             >
               Prenota Ora
             </a>

@@ -80,9 +80,9 @@
 
 @theme inline {
   --font-passion-one: var(--font-passion-one);
-  --font-outfit: var(--font-outfit);
   --font-cormorant-garamond: var(--font-cormorant-garamond);
-  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-onest: var(--font-onest);
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -129,35 +129,55 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-onest);
   }
 
-  h1,
+  /* Option B - Mixed Elegance Hierarchy */
+  
+  /* Display Headings - Bold Impact */
+  h1 {
+    font-family: var(--font-passion-one);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  /* Content Headings - Elegant Serif */
   h2,
   h3 {
-    font-family: var(--font-passion-one);
+    font-family: var(--font-cormorant-garamond);
+    font-weight: 500;
   }
 
-  p {
-    font-family: var(--font-outfit);
+  /* Body Text - Clean Sans */
+  p,
+  span,
+  a,
+  li {
+    font-family: var(--font-onest);
+    font-weight: 400;
   }
 }
 
 /* Markdown content styling */
 .prose {
   @apply max-w-none;
+  font-family: var(--font-onest);
 }
 
-.prose h1,
+.prose h1 {
+  @apply text-4xl text-foreground font-bold mb-4 mt-6 first:mt-0;
+  font-family: var(--font-passion-one);
+  font-weight: 400;
+}
+
 .prose h2,
 .prose h3,
 .prose h4,
 .prose h5,
 .prose h6 {
   @apply text-foreground font-bold mb-4 mt-6 first:mt-0;
-}
-
-.prose h1 {
-  @apply text-4xl;
+  font-family: var(--font-cormorant-garamond);
+  font-weight: 500;
 }
 
 .prose h2 {
@@ -174,6 +194,7 @@
 
 .prose p {
   @apply text-foreground/80 mb-4 leading-relaxed;
+  font-family: var(--font-onest);
 }
 
 .prose a {

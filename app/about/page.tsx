@@ -48,16 +48,16 @@ export default async function AboutPage() {
   const richTextOptions = {
     renderNode: {
       [BLOCKS.HEADING_2]: (node: any, children: any) => (
-        <h2 className="text-3xl font-bold text-primary mb-6 mt-12 first:mt-0">{children}</h2>
+        <h2 className="text-3xl font-cormorant-garamond font-medium text-primary mb-6 mt-12 first:mt-0">{children}</h2>
       ),
       [BLOCKS.HEADING_3]: (node: any, children: any) => (
-        <h3 className="text-2xl font-bold text-primary mb-4 mt-8">{children}</h3>
+        <h3 className="text-2xl font-cormorant-garamond font-medium text-primary mb-4 mt-8">{children}</h3>
       ),
       [BLOCKS.PARAGRAPH]: (node: any, children: any) => (
-        <p className="text-lg text-foreground/70 leading-relaxed mb-4">{children}</p>
+        <p className="text-lg font-onest text-foreground/70 leading-relaxed mb-4">{children}</p>
       ),
       [BLOCKS.UL_LIST]: (node: any, children: any) => (
-        <ul className="list-disc pl-6 mb-6 space-y-2 text-lg text-foreground/70">{children}</ul>
+        <ul className="list-disc pl-6 mb-6 space-y-2 text-lg font-onest text-foreground/70">{children}</ul>
       ),
     },
   }
@@ -71,9 +71,9 @@ export default async function AboutPage() {
         {/* Hero Section */}
         <section className="bg-gradient-to-b from-secondary/30 to-background py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-5xl font-bold text-primary mb-6 text-center uppercase">{author.name}</h1>
+            <h1 className="text-5xl font-passion-one font-normal text-primary mb-6 text-center uppercase tracking-wide">{author.name}</h1>
             {author.slogan && (
-              <p className="text-2xl text-foreground/70 text-center uppercase mb-8">{author.slogan}</p>
+              <p className="text-2xl font-cormorant-garamond text-foreground/70 text-center italic mb-8">{author.slogan}</p>
             )}
             {author.profileImageUrl && (
               <div className="relative w-full aspect-4/3 rounded-md mx-auto overflow-hidden border-2 border-primary/20 shadow-xl">
@@ -102,13 +102,13 @@ export default async function AboutPage() {
               {/* Target Groups / Per Chi Lavoro */}
               {author.targetGroups && author.targetGroups.length > 0 && (
                 <div className="my-24">
-                  <h2 className="text-3xl font-bold text-primary mb-6">Per Chi Lavoro</h2>
+                  <h2 className="text-3xl font-cormorant-garamond font-medium text-primary mb-6">Per Chi Lavoro</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {author.targetGroups.map((group, index) => (
                       <div key={index} className="bg-secondary/30 p-6 rounded-lg">
-                        <h3 className="text-xl font-bold text-primary mb-3">{group.name}</h3>
+                        <h3 className="text-xl font-cormorant-garamond font-medium text-primary mb-3">{group.name}</h3>
                         {group.targetingMethod && (
-                          <p className="text-foreground/70">
+                          <p className="font-onest text-foreground/70">
                             {group.targetingMethod}
                           </p>
                         )}
@@ -119,9 +119,9 @@ export default async function AboutPage() {
               )}
 
               <div className="bg-primary/10 p-8 rounded-lg">
-                <h2 className="text-2xl font-bold text-primary mb-4">La Promessa</h2>
+                <h2 className="text-2xl font-cormorant-garamond font-medium text-primary mb-4">La Promessa</h2>
                 <div
-                  className="text-lg text-foreground/70 prose prose-primary max-w-none"
+                  className="text-lg font-onest text-foreground/70 prose prose-primary max-w-none"
                   dangerouslySetInnerHTML={{ __html: promiseHtml }}
                 />
               </div>
@@ -133,15 +133,15 @@ export default async function AboutPage() {
         {/* CTA Section */}
         <section className="py-20 bg-gradient-to-b from-background to-secondary/30">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-4xl font-bold text-primary mb-6">Pronto a Iniziare il Tuo Reset?</h2>
-            <p className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-cormorant-garamond font-medium text-primary mb-6">Pronto a Iniziare il Tuo Reset?</h2>
+            <p className="text-xl font-onest text-foreground/70 mb-8 max-w-2xl mx-auto">
               Scopri come posso aiutarti a raggiungere il tuo benessere fisico duraturo.
             </p>
             <a
               href={author.bookingLink || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-background bg-primary hover:bg-primary/90 rounded-lg transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 text-lg font-passion-one font-semibold text-background bg-primary hover:bg-primary/90 rounded-lg transition-colors uppercase tracking-wide"
             >
               Prenota un Appuntamento
             </a>
