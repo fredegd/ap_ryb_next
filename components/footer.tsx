@@ -15,7 +15,7 @@ export async function Footer() {
 
   return (
     <footer id="contact" className="bg-primary text-primary-foreground py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto xl:mx-34 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
             <h3 className="font-bold text-lg mb-4">Reset Your Body</h3>

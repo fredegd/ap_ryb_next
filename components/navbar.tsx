@@ -39,7 +39,7 @@ export function Navbar() {
     <>
       <nav className={`sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"
         }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="max-w-8xl mx-auto xl:mx-34 px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <img className="w-8 h-8" alt="AP Logo" src="/favicon.svg" />
             <span className="font-semibold text-foreground dark:text-accent sm:inline font-passion-one text-lg">MASSOTERAPIA</span>

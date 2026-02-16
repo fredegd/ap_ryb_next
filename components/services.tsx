@@ -11,7 +11,7 @@ export function Services({ services }: ServicesProps) {
 
   return (
     <section id="services" className="bg-secondary/50 py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto xl:mx-34 px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center mb-16 text-primary">PERCORSI BENESSERE</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-4 gap-6">

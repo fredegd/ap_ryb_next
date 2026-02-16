@@ -95,7 +95,7 @@ export default async function ServiziPage() {
                 id={section.name.toLowerCase().replace(/\s+/g, '-')}
                 className="pt-14 pb-8 relative overflow-visible z-0 hover:z-20 transition-[z-index]"
               >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-8xl mx-auto xl:mx-34 px-4 sm:px-6 lg:px-8">
                   <h2
                     className="text-3xl font-bold mb-6 drop-shadow-md inline-block border-b-4 pb-2"
                     style={{ borderColor: section.color || 'var(--primary)' }}

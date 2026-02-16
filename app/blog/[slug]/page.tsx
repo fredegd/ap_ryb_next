@@ -139,7 +139,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 {/* Related Services */}
                 {post.relatedServices && post.relatedServices.length > 0 && (
                     <section className="py-12 bg-secondary/20">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="max-w-8xl mx-auto xl:mx-34 px-4 sm:px-6 lg:px-8">
                             <h2 className="text-3xl font-bold text-center mb-10 text-primary">
                                 Servizi Correlati
                             </h2>
