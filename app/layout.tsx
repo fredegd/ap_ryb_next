@@ -25,9 +25,9 @@ const outfit = Outfit({
   variable: "--font-outfit"
 })
 
-const tanMonChery = localFont({
-  src: "./fonts/TanMonChery.ttf",
-  variable: "--font-tan-mon-chery",
+const cormorantGaramond = localFont({
+  src: "./fonts/CormorantGaramond-Regular.ttf",
+  variable: "--font-cormorant-garamond",
   display: "swap",
 })
 
@@ -84,7 +84,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${passionOne.variable} ${firaSans.variable} ${outfit.variable} ${tanMonChery.variable} font-outfit antialiased`}>
+      <body className={`${passionOne.variable} ${firaSans.variable} ${outfit.variable} ${cormorantGaramond.variable} font-outfit antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Navbar />
           {children}

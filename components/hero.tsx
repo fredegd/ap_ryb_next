@@ -38,7 +38,7 @@ export function Hero({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 ">
         <h1 className="text-6xl md:text-7xl font-bold mb-8 ">{titleFirst}</h1>
         {titleRest && <h2 className="text-6xl md:text-7xl font-bold mb-8 text-accent">{titleRest}</h2>}
-        <p className="text-lg text-foreground/70 font-tan-mon-chery mb-12 max-w-2xl mx-auto">
+        <p className="text-lg text-foreground/70 font-cormorant-garamond mb-12 max-w-2xl mx-auto">
           {subtitle}
         </p>
         <Link href={ctaLink} className="px-8 py-3 border-2 border-primary rounded-md text-primary font-semibold hover:bg-primary hover:text-primary-foreground transition-colors duration-300 inline-block">
