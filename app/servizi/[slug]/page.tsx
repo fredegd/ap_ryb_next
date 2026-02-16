@@ -24,7 +24,7 @@ interface PageProps {
 
 const richTextOptions = {
     renderNode: {
-        [BLOCKS.HEADING_2]: (node: any, children: any) => <h2 className="text-3xl font-bold mb-6 flex items-center font-tan-mon-chery">{children}</h2>,
+        [BLOCKS.HEADING_2]: (node: any, children: any) => <h2 className="text-3xl font-bold mb-6 flex items-center font-cormorant-garamond">{children}</h2>,
         [BLOCKS.PARAGRAPH]: (node: any, children: any) => <p className="font-outfit mb-4">{children}</p>,
     },
 }
@@ -124,7 +124,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* How It Works */}
                         {service.howDoesItWork && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold mb-6 flex items-center font-tan-mon-chery">
+                                <h2 className="text-3xl font-bold mb-6 flex items-center font-cormorant-garamond">
                                     <Info className="w-8 h-8 text-primary mr-3" />
                                     Come Funziona
                                 </h2>
@@ -137,7 +137,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Benefits */}
                         {service.benefits && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold mb-6 flex items-center font-tan-mon-chery">
+                                <h2 className="text-3xl font-bold mb-6 flex items-center font-cormorant-garamond">
                                     <CheckCircle className="w-8 h-8 text-primary mr-3" />
                                     Benefici
                                 </h2>
@@ -150,7 +150,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Who Is It For */}
                         {service.whoIsItFor && (
                             <div className="mb-16 bg-secondary/10 rounded-2xl">
-                                <h2 className="text-3xl font-bold mb-6 font-tan-mon-chery">Per Chi È Indicato</h2>
+                                <h2 className="text-3xl font-bold mb-6 font-cormorant-garamond">Per Chi È Indicato</h2>
                                 <div className="prose prose-invert max-w-none text-foreground/80 ">
                                     {documentToReactComponents(service.whoIsItFor, richTextOptions)}
                                 </div>
@@ -160,7 +160,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Contraindications */}
                         {service.contraindications && (
                             <div className="mb-16 border-l-4 border-destructive pl-6 py-1">
-                                <h2 className="text-2xl font-bold mb-4 flex items-center text-destructive font-tan-mon-chery">
+                                <h2 className="text-2xl font-bold mb-4 flex items-center text-destructive font-cormorant-garamond">
                                     <AlertTriangle className="w-6 h-6 mr-3" />
                                     Controindicazioni
                                 </h2>
@@ -173,7 +173,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Treatment Process */}
                         {service.treatmentProcess && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold mb-6 font-tan-mon-chery">Come Funziona il Trattamento</h2>
+                                <h2 className="text-3xl font-bold mb-6 font-cormorant-garamond">Come Funziona il Trattamento</h2>
                                 <div className="prose prose-invert max-w-none text-foreground/80">
                                     {documentToReactComponents(service.treatmentProcess, richTextOptions)}
                                 </div>

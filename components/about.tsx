@@ -17,7 +17,7 @@ const richTextOptions = {
     [BLOCKS.HEADING_4]: () => null,
     [BLOCKS.HEADING_5]: () => null,
     [BLOCKS.HEADING_6]: () => null,
-    [BLOCKS.PARAGRAPH]: (node: any, children: any) => <p className="font-tan-mon-chery">{children}</p>,
+    [BLOCKS.PARAGRAPH]: (node: any, children: any) => <p className="font-cormorant-garamond">{children}</p>,
   },
 }
 
@@ -30,7 +30,7 @@ export function About({ name, slogan, bio }: AboutProps) {
           <h3 className="text-2xl font-passionone font-bold text-foreground mb-8 text-center uppercase">{slogan}</h3>
         )}
 
-        <div className="space-y-8 text-foreground/80 leading-relaxed text-lg font-tan-mon-chery">
+        <div className="space-y-8 text-foreground/80 leading-relaxed text-lg font-cormorant-garamond">
           {bio ? (
             documentToReactComponents(bio, richTextOptions)
           ) : (
