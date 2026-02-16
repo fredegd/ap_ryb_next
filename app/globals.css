@@ -145,7 +145,7 @@
   h2,
   h3 {
     font-family: var(--font-cormorant-garamond);
-    font-weight: 500;
+    font-weight: 600;
   }
 
   /* Body Text - Clean Sans */
@@ -177,7 +177,7 @@
 .prose h6 {
   @apply text-foreground font-bold mb-4 mt-6 first:mt-0;
   font-family: var(--font-cormorant-garamond);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .prose h2 {

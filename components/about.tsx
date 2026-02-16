@@ -27,7 +27,7 @@ export function About({ name, slogan, bio }: AboutProps) {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <h1 className="text-5xl font-passion-one font-normal text-primary mb-8 text-center uppercase tracking-wide">{name}</h1>
         {slogan && (
-          <h2 className="text-3xl font-cormorant-garamond font-medium text-foreground/80 mb-12 text-center italic">{slogan}</h2>
+          <h2 className="text-3xl font-cormorant-garamond font-semibold text-foreground/80 mb-12 text-center italic">{slogan}</h2>
         )}
 
         <div className="space-y-6 text-foreground/80 leading-relaxed text-lg font-onest">

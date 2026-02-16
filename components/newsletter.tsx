@@ -40,9 +40,9 @@ export function Newsletter() {
     return (
         <section className="bg-primary/10 py-16">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 className="text-3xl font-cormorant-garamond font-medium text-foreground mb-6">Rimani Aggiornato</h2>
+                <h2 className="text-3xl font-cormorant-garamond font-semibold text-foreground mb-6">Rimani Aggiornato</h2>
                 <p className="text-lg font-onest text-foreground/70 mb-8">
-                    Iscriviti alla newsletter per ricevere i nuovi articoli direttamente nella tua casella di posta.
+                    Iscriviti alla mia newsletter per ricevere i miei aggiornamenti direttamente nella tua casella di posta.
                 </p>
                 <form onSubmit={handleSubmit} className="max-w-md mx-auto">
                     <div className="flex gap-4">

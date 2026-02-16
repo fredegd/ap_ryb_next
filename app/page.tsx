@@ -18,8 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const services = (await getFeaturedServices()).slice(0, 4)
-  const posts = (await getFeaturedBlogPosts()).slice(0, 4)
+  const services = await getFeaturedServices()
+  const posts = await getFeaturedBlogPosts()
   const pageSettings = await getPageSettings("Home")
 
   const authorId = process.env.AUTHOR_ENTRY_ID || ""

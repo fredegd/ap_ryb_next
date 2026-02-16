@@ -25,7 +25,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
                 {/* Content */}
                 <div className="absolute inset-0 p-6 flex flex-col justify-end z-10">
                     <div className="transform transition-transform duration-300 group-hover:-translate-y-2">
-                        <h3 className="text-white font-cormorant-garamond font-medium text-xl mb-2">{service.title}</h3>
+                        <h3 className="text-white font-cormorant-garamond font-semibold text-xl mb-2">{service.title}</h3>
                         <p className="text-white/80 font-onest text-sm leading-relaxed transition-opacity duration-300 group-hover:opacity-0 line-clamp-3">
                             {service.description}
                         </p>

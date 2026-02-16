@@ -23,7 +23,7 @@ export async function Footer() {
           </div>
 
           <div>
-            <h4 className="font-cormorant-garamond font-medium text-lg mb-4">Servizi</h4>
+            <h4 className="font-cormorant-garamond font-semibold text-lg mb-4">Servizi</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/80">
               <li>
                 <a href="/servizi/#massoterapia" className="hover:text-primary-foreground transition-colors">
@@ -44,7 +44,7 @@ export async function Footer() {
           </div>
 
           <div>
-            <h4 className="font-cormorant-garamond font-medium text-lg mb-4">Contatti</h4>
+            <h4 className="font-cormorant-garamond font-semibold text-lg mb-4">Contatti</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/80">
               {author?.email && (
                 <li className="flex items-center gap-2">

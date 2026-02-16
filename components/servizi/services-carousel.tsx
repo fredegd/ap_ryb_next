@@ -123,7 +123,7 @@ export function ServicesCarousel({ sectionName, services }: ServicesCarouselProp
                               <div className="text-[11px] font-onest font-semibold uppercase tracking-[0.24em] text-white/70">
                                 {categoryLabel}
                               </div>
-                              <h3 className="mt-2 text-white text-lg sm:text-xl font-cormorant-garamond font-medium leading-tight drop-shadow-md line-clamp-2">
+                              <h3 className="mt-2 text-white text-lg sm:text-xl font-cormorant-garamond font-semibold leading-tight drop-shadow-md line-clamp-2">
                                 {service.title}
                               </h3>
                             </div>

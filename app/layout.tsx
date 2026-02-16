@@ -16,10 +16,10 @@ const passionOne = localFont({
 
 // Elegant Serif - Content Headings & Accents
 const cormorantGaramond = localFont({
-  src: "./fonts/CormorantGaramond-Medium.ttf",
+  src: "./fonts/CormorantGaramond-SemiBold.ttf",
   variable: "--font-cormorant-garamond",
   display: "swap",
-  weight: "500",
+  weight: "600",
 })
 
 // Body Font - Clean, Modern UI

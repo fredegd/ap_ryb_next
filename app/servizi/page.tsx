@@ -45,7 +45,7 @@ export default async function ServiziPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-5xl font-passion-one font-normal text-primary mb-6 text-center uppercase tracking-wide">Percorsi Benessere</h1>
             <p className="text-lg font-onest text-foreground/70 text-center max-w-2xl mx-auto">
-              Scopri i nostri servizi specializzati, progettati per aiutarti a raggiungere il massimo benessere fisico e
+              Scopri i miei servizi specializzati, progettati per aiutarti a raggiungere il massimo benessere fisico e
               mentale.
             </p>
           </div>
@@ -97,7 +97,7 @@ export default async function ServiziPage() {
               >
                 <div className="max-w-8xl mx-auto xl:mx-34 px-4 sm:px-6 lg:px-8">
                   <h2
-                    className="text-3xl font-cormorant-garamond font-medium mb-6 drop-shadow-md inline-block border-b-4 pb-2"
+                    className="text-3xl font-cormorant-garamond font-semibold mb-6 drop-shadow-md inline-block border-b-4 pb-2"
                     style={{ borderColor: section.color || 'var(--primary)' }}
                   >
                     {section.name.toUpperCase()}
@@ -112,7 +112,7 @@ export default async function ServiziPage() {
         {/* CTA Section */}
         <section className="bg-primary/10 py-32">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-cormorant-garamond font-medium text-foreground mb-6">Pronto a Resettare il Tuo Corpo?</h2>
+            <h2 className="text-3xl font-cormorant-garamond font-semibold text-foreground mb-6">Pronto a Resettare il Tuo Corpo?</h2>
             <p className="text-lg font-onest text-foreground/70 mb-8">
               Contattami per prenotare la tua prima sessione di consulenza.
             </p>

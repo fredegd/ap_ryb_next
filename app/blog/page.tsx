@@ -85,7 +85,7 @@ export default async function BlogPage() {
                         <span className="text-sm text-white/90">{post.date}</span>
                       </div>
                     </div>
-                    <h2 className="text-3xl font-cormorant-garamond font-medium text-foreground mb-4 group-hover:text-primary transition-colors">
+                    <h2 className="text-3xl font-cormorant-garamond font-semibold text-foreground mb-4 group-hover:text-primary transition-colors">
                       {post.title}
                     </h2>
                   </Link>
