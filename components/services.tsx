@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link"
 import type { Service } from "@/lib/services"
 import { ContentCarousel } from "@/components/ui/content-carousel"

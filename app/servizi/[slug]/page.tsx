@@ -173,7 +173,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {/* Treatment Process */}
                         {service.treatmentProcess && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-cormorant-garamond font-semibold mb-6">Come Funziona il Trattamento</h2>
+                                <h2 className="text-3xl font-cormorant-garamond font-semibold mb-6">Come si svolge il Trattamento</h2>
                                 <div className="prose prose-invert max-w-none text-foreground/80">
                                     {documentToReactComponents(service.treatmentProcess, richTextOptions)}
                                 </div>
