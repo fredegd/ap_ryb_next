@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Passion_One, Fira_Sans, Outfit } from "next/font/google"
+import { Passion_One, Outfit } from "next/font/google"
 import localFont from "next/font/local"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -11,12 +11,6 @@ const passionOne = Passion_One({
   weight: ['400', '700', '900'],
   subsets: ["latin"],
   variable: "--font-passion-one"
-})
-
-const firaSans = Fira_Sans({
-  weight: ['300', '400', '500', '600', '700'],
-  subsets: ["latin"],
-  variable: "--font-fira-sans"
 })
 
 const outfit = Outfit({
@@ -84,7 +78,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${passionOne.variable} ${firaSans.variable} ${outfit.variable} ${cormorantGaramond.variable} font-outfit antialiased`}>
+      <body className={`${passionOne.variable} ${outfit.variable} ${cormorantGaramond.variable} font-outfit antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Navbar />
           {children}

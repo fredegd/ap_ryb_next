@@ -80,7 +80,6 @@
 
 @theme inline {
   --font-passion-one: var(--font-passion-one);
-  --font-fira-sans: var(--font-fira-sans);
   --font-outfit: var(--font-outfit);
   --font-cormorant-garamond: var(--font-cormorant-garamond);
   --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
@@ -135,7 +134,7 @@
   h1,
   h2,
   h3 {
-    font-family: var(--font-fira-sans);
+    font-family: var(--font-passion-one);
   }
 
   p {
