@@ -5,7 +5,7 @@ import { Newsletter } from "@/components/newsletter"
 import { getBlogPostBySlug, getBlogPostSlugs } from "@/lib/blog"
 import { notFound } from "next/navigation"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-import { ServiceCard } from "@/components/service-card"
+import { ServicesCarousel } from "@/components/servizi/services-carousel"
 import { Clock } from "lucide-react"
 import { BackToTop } from "@/components/back-to-top"
 
@@ -93,7 +93,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                     <Link
                         href="/blog"
-                        className="absolute top-5 left-5 z-20 inline-flex items-center gap-2 rounded-xl bg-black/45 text-white px-4 py-2 text-sm font-semibold backdrop-blur-sm transition-all opacity-35 hover:opacity-100 hover:bg-black/75"
+                        className="absolute top-5 left-5 z-20 inline-flex items-center gap-2 rounded-xl bg-black/45 backdrop-blur-md text-white px-4 py-2 text-sm font-semibold transition-all opacity-35 hover:opacity-100 hover:bg-black/75"
                     >
                         ← Torna al Blog
                     </Link>
@@ -158,11 +158,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                             <h2 className="text-3xl font-cormorant-garamond font-semibold text-center mb-10 text-primary">
                                 Servizi Correlati
                             </h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                {post.relatedServices.map((service) => (
-                                    <ServiceCard key={service.id} service={service} />
-                                ))}
-                            </div>
+                            <ServicesCarousel sectionName="Servizi correlati" services={post.relatedServices} />
                         </div>
                     </section>
                 )}

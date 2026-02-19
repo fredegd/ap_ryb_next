@@ -39,7 +39,7 @@ export function ContentCard({
     <Link href={href}>
       <div
         className={cn(
-          'group relative transition-transform duration-500 ease-out will-change-transform data-[active=true]:-translate-y-4 data-[active=true]:scale-[1.3] data-[elevated=true]:z-50 data-[elevated=false]:z-0',
+          'group relative transition-transform duration-500 ease-out will-change-transform data-[active=true]:-translate-y-20 data-[active=true]:scale-[1.18] data-[elevated=true]:z-50 data-[elevated=false]:z-0',
           edgeClass,
         )}
         data-active={isActive ? 'true' : 'false'}
@@ -47,7 +47,7 @@ export function ContentCard({
         onMouseEnter={onHoverStart}
         onMouseLeave={onHoverEnd}
       >
-        <div className="relative overflow-hidden rounded-lg bg-background/5 ring-1 ring-white/10 shadow-[0_18px_40px_rgba(0,0,0,0.35)] transition-shadow duration-500 group-data-[active=true]:shadow-[0_30px_80px_rgba(0,0,0,0.55)] group-data-[active=true]:rounded-b-none">
+        <div className="relative overflow-hidden rounded-lg bg-background/5 ring-1 ring-white/10 shadow-[0_18px_40px_rgba(0,0,0,0.35)] transition-shadow duration-500 group-data-[active=true]:shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
           <div className="relative h-[170px] sm:h-[190px] lg:h-[210px]">
             <Image
               src={image}
@@ -72,7 +72,7 @@ export function ContentCard({
           </div>
         </div>
 
-        <div className="absolute left-0 right-0 top-full mt-0 rounded-b-lg bg-[#121820]/95 backdrop-blur-md px-4 py-5 invisible opacity-0 transition-all duration-500 delay-100 group-data-[active=true]:opacity-100 group-data-[active=true]:visible group-data-[active=true]:invisible-0  shadow-[0_20px_60px_rgba(0,0,0,0.55)]">
+        <div className="absolute left-0 right-0 top-full mt-0 rounded-b-lg bg-[#121820]/95 backdrop-blur-md px-4 py-5 invisible opacity-0 transition-all duration-500 delay-100 group-data-[active=true]:opacity-100 group-data-[active=true]:visible group-data-[active=true]:invisible-0  group-data-[active=true]:translate-y-[-0.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.55)]">
           <div className="mb-3">
             <div className="text-[11px] font-onest font-semibold uppercase tracking-[0.24em] text-white/70 mb-2">
               {categoryLabel}
