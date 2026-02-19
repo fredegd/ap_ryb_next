@@ -8,13 +8,7 @@ import { BLOCKS } from "@contentful/rich-text-types"
 import { Clock, Tag, CheckCircle, Info, AlertTriangle } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Card, CardContent } from "@/components/ui/card"
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
+import { ServiceGalleryCarousel } from "@/components/servizi/service-gallery-carousel"
 
 interface PageProps {
     params: {
@@ -179,6 +173,16 @@ export default async function ServicePage({ params }: PageProps) {
                                 </div>
                             </div>
                         )}
+                            {/* Gallery */}
+                            {service.gallery && service.gallery.length > 0 && (
+                            <div className="mb-16">
+                                <h2 className="text-3xl font-cormorant-garamond font-semibold mb-8">Galleria</h2>
+                                <ServiceGalleryCarousel
+                                    images={service.gallery}
+                                    title={service.title}
+                                />
+                            </div>
+                        )}
 
                         {/* Key Details Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
@@ -225,36 +229,7 @@ export default async function ServicePage({ params }: PageProps) {
                             </a>
                         </div>
 
-                        {/* Gallery */}
-                        {service.gallery && service.gallery.length > 0 && (
-                            <div className="mb-16">
-                                <h2 className="text-3xl font-cormorant-garamond font-semibold mb-8">Galleria</h2>
-                                <Carousel
-                                    opts={{
-                                        align: "start",
-                                        loop: true,
-                                    }}
-                                    className="w-full"
-                                >
-                                    <CarouselContent className="-ml-4">
-                                        {service.gallery.map((imgUrl, index) => (
-                                            <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                                                <div className="relative h-72 rounded-xl overflow-hidden">
-                                                    <Image
-                                                        src={imgUrl}
-                                                        alt={`Gallery image ${index + 1}`}
-                                                        fill
-                                                        className="object-cover hover:scale-105 transition-transform duration-300"
-                                                    />
-                                                </div>
-                                            </CarouselItem>
-                                        ))}
-                                    </CarouselContent>
-                                    <CarouselPrevious />
-                                    <CarouselNext />
-                                </Carousel>
-                            </div>
-                        )}
+                    
 
                         {/* Testimonials */}
                         {service.testimonials && service.testimonials.length > 0 && (

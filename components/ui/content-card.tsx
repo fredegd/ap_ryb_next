@@ -39,7 +39,7 @@ export function ContentCard({
     <Link href={href}>
       <div
         className={cn(
-          'group relative transition-transform duration-500 ease-out will-change-transform data-[active=true]:-translate-y-20 data-[active=true]:scale-[1.18] data-[elevated=true]:z-50 data-[elevated=false]:z-0',
+          'group relative transition-transform duration-500 ease-out will-change-transform data-[active=true]:-translate-y-20 delay-100 data-[active=true]:scale-[1.18] data-[elevated=true]:z-50 data-[elevated=false]:z-0 ',
           edgeClass,
         )}
         data-active={isActive ? 'true' : 'false'}
