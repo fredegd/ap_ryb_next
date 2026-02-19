@@ -18,7 +18,17 @@ export interface ContentCarouselItem {
 
 interface ContentCarouselProps<T extends ContentCarouselItem> {
   items: T[]
-  renderCard: (item: T, index: number, edgeClass: string) => React.ReactNode
+  renderCard: (
+    item: T,
+    index: number,
+    edgeClass: string,
+    interaction: {
+      isActive: boolean
+      isElevated: boolean
+      onHoverStart: () => void
+      onHoverEnd: () => void
+    },
+  ) => React.ReactNode
   className?: string
   itemClassName?: string
 }
@@ -34,8 +44,15 @@ export function ContentCarousel<T extends ContentCarouselItem>({
     left: null,
     right: null,
   })
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null)
+  const [closingIndex, setClosingIndex] = React.useState<number | null>(null)
+  const [pendingIndex, setPendingIndex] = React.useState<number | null>(null)
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
   const [canScrollNext, setCanScrollNext] = React.useState(false)
+  const switchTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+  const closeTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const TRANSITION_MS = 500
 
   const updateEdges = React.useCallback((embla: CarouselApi) => {
     if (!embla) return
@@ -48,6 +65,89 @@ export function ContentCarousel<T extends ContentCarouselItem>({
     setCanScrollPrev(embla.canScrollPrev())
     setCanScrollNext(embla.canScrollNext())
   }, [])
+
+  const clearSwitchTimeout = React.useCallback(() => {
+    if (switchTimeoutRef.current) {
+      clearTimeout(switchTimeoutRef.current)
+      switchTimeoutRef.current = null
+    }
+  }, [])
+
+  const clearCloseTimeout = React.useCallback(() => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current)
+      closeTimeoutRef.current = null
+    }
+  }, [])
+
+  const startClosing = React.useCallback(
+    (index: number) => {
+      setClosingIndex(index)
+      clearCloseTimeout()
+      closeTimeoutRef.current = setTimeout(() => {
+        setClosingIndex((current) => (current === index ? null : current))
+      }, TRANSITION_MS)
+    },
+    [clearCloseTimeout],
+  )
+
+  const handleHoverStart = React.useCallback(
+    (index: number) => {
+      if (activeIndex === index) return
+
+      if (closingIndex === index) {
+        clearSwitchTimeout()
+        clearCloseTimeout()
+        setClosingIndex(null)
+        setPendingIndex(null)
+        setActiveIndex(index)
+        return
+      }
+
+      if (activeIndex === null && closingIndex === null) {
+        clearSwitchTimeout()
+        setPendingIndex(null)
+        setActiveIndex(index)
+        return
+      }
+
+      if (activeIndex !== null) {
+        startClosing(activeIndex)
+        setActiveIndex(null)
+      }
+
+      setPendingIndex(index)
+      clearSwitchTimeout()
+      switchTimeoutRef.current = setTimeout(() => {
+        setActiveIndex(index)
+        setPendingIndex(null)
+        setClosingIndex(null)
+        switchTimeoutRef.current = null
+      }, TRANSITION_MS)
+    },
+    [
+      activeIndex,
+      closingIndex,
+      clearCloseTimeout,
+      clearSwitchTimeout,
+      startClosing,
+    ],
+  )
+
+  const handleHoverEnd = React.useCallback(
+    (index: number) => {
+      if (pendingIndex === index) {
+        setPendingIndex(null)
+        clearSwitchTimeout()
+      }
+
+      if (activeIndex === index) {
+        setActiveIndex(null)
+        startClosing(index)
+      }
+    },
+    [activeIndex, pendingIndex, clearSwitchTimeout, startClosing],
+  )
 
   React.useEffect(() => {
     if (!api) return
@@ -63,6 +163,13 @@ export function ContentCarousel<T extends ContentCarouselItem>({
       api.off('scroll', updateEdges)
     }
   }, [api, updateEdges])
+
+  React.useEffect(() => {
+    return () => {
+      clearSwitchTimeout()
+      clearCloseTimeout()
+    }
+  }, [clearSwitchTimeout, clearCloseTimeout])
 
   return (
     <div className={cn('relative overflow-visible', className)}>
@@ -94,10 +201,12 @@ export function ContentCarousel<T extends ContentCarouselItem>({
               {items.map((item, index) => {
                 const edgeClass =
                   index === edge.left
-                    ? 'origin-left hover:translate-x-3'
+                    ? 'origin-left data-[active=true]:translate-x-3'
                     : index === edge.right
-                      ? 'origin-right hover:-translate-x-3'
+                      ? 'origin-right data-[active=true]:-translate-x-3'
                       : 'origin-center'
+                const isActive = index === activeIndex
+                const isElevated = isActive || index === closingIndex
 
                 return (
                   <CarouselItem
@@ -107,7 +216,12 @@ export function ContentCarousel<T extends ContentCarouselItem>({
                       itemClassName
                     )}
                   >
-                    {renderCard(item, index, edgeClass)}
+                    {renderCard(item, index, edgeClass, {
+                      isActive,
+                      isElevated,
+                      onHoverStart: () => handleHoverStart(index),
+                      onHoverEnd: () => handleHoverEnd(index),
+                    })}
                   </CarouselItem>
                 )
               })}

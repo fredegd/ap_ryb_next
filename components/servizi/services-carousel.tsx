@@ -13,7 +13,7 @@ export function ServicesCarousel({ sectionName, services }: ServicesCarouselProp
   return (
     <ContentCarousel
       items={services}
-      renderCard={(service, index, edgeClass) => {
+      renderCard={(service, index, edgeClass, interaction) => {
         const categoryLabel = service.categories?.[0]?.name || sectionName
         const metaLabel = service.duration || (service.price ? `€ ${service.price}` : undefined)
 
@@ -28,6 +28,10 @@ export function ServicesCarousel({ sectionName, services }: ServicesCarouselProp
             description={service.description}
             ctaText="Scopri il servizio"
             edgeClass={edgeClass}
+            isActive={interaction.isActive}
+            isElevated={interaction.isElevated}
+            onHoverStart={interaction.onHoverStart}
+            onHoverEnd={interaction.onHoverEnd}
           />
         )
       }}
