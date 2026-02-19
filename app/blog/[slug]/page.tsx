@@ -7,6 +7,7 @@ import { notFound } from "next/navigation"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { ServiceCard } from "@/components/service-card"
 import { Clock } from "lucide-react"
+import { BackToTop } from "@/components/back-to-top"
 
 interface PageProps {
     params: {
@@ -90,24 +91,38 @@ export default async function BlogPostPage({ params }: PageProps) {
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-black/40"></div>
 
+                    <Link
+                        href="/blog"
+                        className="absolute top-5 left-5 z-20 inline-flex items-center gap-2 rounded-xl bg-black/45 text-white px-4 py-2 text-sm font-semibold backdrop-blur-sm transition-all opacity-35 hover:opacity-100 hover:bg-black/75"
+                    >
+                        ← Torna al Blog
+                    </Link>
+
                     {/* Content Overlay */}
                     <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
                         <div className="max-w-4xl mx-auto w-full">
-                            <div className="mb-4 flex items-center space-x-4">
-                                <span className="inline-block px-3 py-1 text-accent-foreground font-semibold text-sm rounded"
-                                    style={{ backgroundColor: post.categoryColor || 'transparent' }}
-                                >
-                                    {post.category}
-                                </span>
-                                <span className="text-sm text-white/80">{post.date}</span>
-                                {post.readingTime && (
-                                    <span className="flex items-center text-sm text-white/80 gap-1">
-                                        <Clock className="w-4 h-4" />
-                                        {post.readingTime} min
-                                    </span>
-                                )}
-                            </div>
                             <h1 className="text-4xl md:text-5xl font-passion-one font-normal text-white mb-4 uppercase tracking-wide">{post.title}</h1>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Meta Below Image */}
+                <section className="py-6 md:py-8">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex flex-wrap items-center gap-4">
+                            <span
+                                className="inline-block px-3 py-1 text-accent-foreground font-semibold text-sm rounded"
+                                style={{ backgroundColor: post.categoryColor || "transparent" }}
+                            >
+                                {post.category}
+                            </span>
+                            <span className="text-sm text-foreground/70">{post.date}</span>
+                            {post.readingTime && (
+                                <span className="flex items-center text-sm text-foreground/70 gap-1">
+                                    <Clock className="w-4 h-4" />
+                                    {post.readingTime} min
+                                </span>
+                            )}
                         </div>
                     </div>
                 </section>
@@ -154,6 +169,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                 {/* Newsletter Section */}
                 <Newsletter />
+                <BackToTop />
             </main>
             <Footer />
         </div>
