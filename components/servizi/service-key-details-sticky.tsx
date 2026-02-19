@@ -37,7 +37,7 @@ export function ServiceKeyDetailsSticky({
                 if (prev) {
                     return rect.top <= STICKY_OFFSET_PX + STICKY_HYSTERESIS_PX
                 }
-                return rect.top <= STICKY_OFFSET_PX - STICKY_HYSTERESIS_PX
+                return rect.top <= STICKY_OFFSET_PX + 1
             })
         }
 
@@ -78,30 +78,31 @@ export function ServiceKeyDetailsSticky({
         <div ref={stickyRef} className="sticky top-12 right-0 z-40 mb-12">
             <div
                 className={cn(
-                    "grid grid-cols-1 md:auto-rows-fr max-h-24 px-4 py-2 border-2 border-border-500 bg-background/50 backdrop-blur-md rounded-lg gap-6 transition-all duration-300",
+                    "grid grid-cols-3 items-stretch gap-2 transition-all duration-300 md:gap-6 md:auto-rows-fr",
+                    "px-2 py-2 md:px-4 md:py-2 border-2 border-border-500 bg-background/50 backdrop-blur-md rounded-lg",
                     gridColsClass,
                 )}
             >
                 {hasDuration && (
-                    <Card className={cn("h-full", compact && "py-4")}>
-                        <CardContent className={cn("flex items-center h-full p-0")}>
-                            <Clock className={cn("text-primary mr-4", compact ? "w-6 h-6" : "w-8 h-8")} />
+                    <Card className={cn("h-full w-full", compact && "py-1")}>
+                        <CardContent className={cn("flex items-center h-full", compact ? "p-2 md:p-4" : "p-3 md:p-6")}>
+                            <Clock className={cn("text-primary mr-2", compact ? "w-4 h-4 md:w-6 md:h-6" : "w-6 h-6 md:w-8 md:h-8")} />
                             <div>
-                                <h3 className={cn("font-semibold", compact ? "text-base" : "text-lg")}>Durata</h3>
-                                <p className="text-muted-foreground">{duration}</p>
+                                <h3 className={cn("font-semibold", compact ? "text-xs md:text-base" : "text-sm md:text-lg")}>Durata</h3>
+                                <p className="text-muted-foreground text-xs md:text-base leading-snug">{duration}</p>
                             </div>
                         </CardContent>
                     </Card>
                 )}
                 {hasPrice && (
-                    <Card className={cn("h-full", compact && "py-4")}>
-                        <CardContent className={cn("flex items-center justify-center h-full p-0")}>
-                            <Tag className={cn("text-primary mr-4", compact ? "w-6 h-6" : "w-8 h-8")} />
+                    <Card className={cn("h-full w-full", compact && "py-1")}>
+                        <CardContent className={cn("flex items-center h-full", compact ? "p-2 md:p-4" : "p-3 md:p-6")}>
+                            <Tag className={cn("text-primary mr-2", compact ? "w-4 h-4 md:w-6 md:h-6" : "w-6 h-6 md:w-8 md:h-8")} />
                             <div>
-                                <h3 className={cn("font-semibold", compact ? "text-base" : "text-lg")}>Prezzo</h3>
-                                <p className="text-muted-foreground">
+                                <h3 className={cn("font-semibold", compact ? "text-xs md:text-base" : "text-sm md:text-lg")}>Prezzo</h3>
+                                <p className="text-muted-foreground text-xs md:text-base leading-snug">
                                     {price && (
-                                        <span className={cn("block font-bold", compact ? "text-lg" : "text-xl")}>
+                                        <span className={cn("block font-bold", compact ? "text-sm md:text-lg" : "text-base md:text-xl")}>
                                             € {price}.-
                                         </span>
                                     )}
@@ -112,15 +113,16 @@ export function ServiceKeyDetailsSticky({
                     </Card>
                 )}
                 {showBooking && (
-                    <Card className="h-full border-0 bg-primary text-background shadow-sm">
+                    <Card className="h-full w-full border-0 bg-primary text-background shadow-sm">
                         <CardContent className="h-full p-0">
                             <a
                                 href={bookingHref}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center h-full w-full px-6 py-4 text-base font-passion-one font-semibold uppercase tracking-wide whitespace-nowrap transition-colors hover:bg-primary/90 rounded-xl"
+                                className="inline-flex items-center justify-center h-full w-full px-2 py-3 text-[11px] md:text-base font-passion-one font-semibold uppercase tracking-wide text-center leading-tight transition-colors hover:bg-primary/90 rounded-xl"
                             >
-                                Prenota un Appuntamento
+                                <span className="sm:hidden">Prenota</span>
+                                <span className="hidden sm:inline">Prenota un Appuntamento</span>
                             </a>
                         </CardContent>
                     </Card>
