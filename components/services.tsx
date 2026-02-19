@@ -11,7 +11,7 @@ interface ServicesProps {
 
 export function Services({ services }: ServicesProps) {
   return (
-    <section id="services" className="bg-secondary/50 py-20 min-h-[80dvh] md:min-h-screen relative">
+    <section id="services" className="bg-secondary/50 py-20 md:min-h-[80dvh] min-h-[100dvh] md:min-h-screen relative">
        <div className="absolute bottom-[20%] mx-auto w-full flex justify-center">
           <Link
             href="/servizi"

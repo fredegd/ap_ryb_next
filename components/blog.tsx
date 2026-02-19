@@ -11,7 +11,7 @@ interface BlogProps {
 
 export function Blog({ posts }: BlogProps) {
   return (
-    <section id="blog" className="bg-background py-20 relative min-h-[80dvh] md:min-h-screen h-full">
+    <section id="blog" className="bg-background py-20 relative md:min-h-[80dvh] min-h-[100dvh] md:min-h-screen h-full">
         <div className="absolute bottom-[20%] mx-auto w-full flex justify-center">
           <Link
             href="/blog"
