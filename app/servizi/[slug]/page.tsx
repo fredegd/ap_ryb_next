@@ -193,21 +193,7 @@ export default async function ServicePage({ params }: PageProps) {
 
                    
 
-                        {/* CTA Section (Moved) */}
-                        <div className="py-12 bg-gradient-to-b from-background to-secondary/30 rounded-2xl mb-16 text-center px-6">
-                            <h2 className="text-3xl md:text-4xl font-cormorant-garamond font-semibold text-primary mb-6">Pronto a Iniziare il Tuo Reset?</h2>
-                            <p className="text-xl font-onest text-foreground/70 mb-8 max-w-2xl mx-auto">
-                                Scopri come posso aiutarti a raggiungere il tuo benessere fisico duraturo.
-                            </p>
-                            <a
-                                href={service.bookingLink || "https://calendly.com/your-booking-link"}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center px-8 py-4 text-lg font-passion-one font-semibold text-background bg-primary hover:bg-primary/90 rounded-lg transition-colors uppercase tracking-wide"
-                            >
-                                Prenota un Appuntamento
-                            </a>
-                        </div>
+                    
 
                     
 
@@ -266,6 +252,21 @@ export default async function ServicePage({ params }: PageProps) {
                         )}
 
                     </div>
+                        {/* CTA Section (Moved) */}
+                        <div className="py-12 bg-gradient-to-b from-background to-secondary/30 rounded-2xl mb-16 text-center px-6">
+                            <h2 className="text-3xl md:text-4xl font-cormorant-garamond font-semibold text-primary mb-6">Pronto a Iniziare il Tuo Reset?</h2>
+                            <p className="text-xl font-onest text-foreground/70 mb-8 max-w-2xl mx-auto">
+                                Scopri come posso aiutarti a raggiungere il tuo benessere fisico duraturo.
+                            </p>
+                            <a
+                                href={service.bookingLink || "https://calendly.com/your-booking-link"}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center px-8 py-4 text-lg font-passion-one font-semibold text-background bg-primary hover:bg-primary/90 rounded-lg transition-colors uppercase tracking-wide"
+                            >
+                                Prenota un Appuntamento
+                            </a>
+                        </div>
                 </section>
                 {/* Back to Services Link */}
                 <section className="py-12">
