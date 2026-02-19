@@ -5,10 +5,11 @@ import { getServiceBySlug, getServiceSlugs } from "@/lib/services"
 import { notFound } from "next/navigation"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS } from "@contentful/rich-text-types"
-import { Clock, Tag, CheckCircle, Info, AlertTriangle } from "lucide-react"
+import { CheckCircle, Info, AlertTriangle } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Card, CardContent } from "@/components/ui/card"
 import { ServiceGalleryCarousel } from "@/components/servizi/service-gallery-carousel"
+import { ServiceKeyDetailsSticky } from "@/components/servizi/service-key-details-sticky"
 
 interface PageProps {
     params: {
@@ -108,8 +109,14 @@ export default async function ServicePage({ params }: PageProps) {
 
                 {/* Service Content */}
                 <section className="py-16 md:py-20">
-                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                        {/* Key Details Cards */}
+                        <ServiceKeyDetailsSticky
+                            duration={service.duration}
+                            price={service.price}
+                            priceDescription={service.priceDescription}
+                            bookingLink={service.bookingLink}
+                        />
                         {/* Detailed Description */}
                         <div className="prose prose-invert max-w-none space-y-6 text-lg text-foreground/80 leading-relaxed mb-16">
                             {richContent}
@@ -184,34 +191,7 @@ export default async function ServicePage({ params }: PageProps) {
                             </div>
                         )}
 
-                        {/* Key Details Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                            {service.duration && (
-                                <Card>
-                                    <CardContent className="flex items-center p-6">
-                                        <Clock className="w-8 h-8 text-primary mr-4" />
-                                        <div>
-                                            <h3 className="font-semibold text-lg">Durata</h3>
-                                            <p className="text-muted-foreground">{service.duration}</p>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            )}
-                            {(service.price || service.priceDescription) && (
-                                <Card>
-                                    <CardContent className="flex items-center p-6">
-                                        <Tag className="w-8 h-8 text-primary mr-4" />
-                                        <div>
-                                            <h3 className="font-semibold text-lg">Prezzo</h3>
-                                            <p className="text-muted-foreground">
-                                                {service.price && <span className="block font-bold text-xl">€ {service.price}.-</span>}
-                                                {service.priceDescription && <span>{service.priceDescription}</span>}
-                                            </p>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            )}
-                        </div>
+                   
 
                         {/* CTA Section (Moved) */}
                         <div className="py-12 bg-gradient-to-b from-background to-secondary/30 rounded-2xl mb-16 text-center px-6">
