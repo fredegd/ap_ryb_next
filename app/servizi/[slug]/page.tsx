@@ -82,6 +82,13 @@ export default async function ServicePage({ params }: PageProps) {
     }
 
     const richContent = documentToReactComponents(service.content, richTextOptions)
+    const bookingPhoneHref = service.bookingPhoneNr
+        ? `tel:${service.bookingPhoneNr.replace(/\s+/g, "")}`
+        : undefined
+    const bookingHref =
+        service.bookingLink ||
+        bookingPhoneHref ||
+        "https://www.instagram.com/massoterapista_paradiso/"
 
     return (
         <div className="min-h-screen ">
@@ -116,6 +123,7 @@ export default async function ServicePage({ params }: PageProps) {
                             price={service.price}
                             priceDescription={service.priceDescription}
                             bookingLink={service.bookingLink}
+                            bookingPhoneNr={service.bookingPhoneNr}
                         />
                         {/* Detailed Description */}
                         <div className="prose prose-invert max-w-none space-y-6 text-lg text-foreground/80 leading-relaxed mb-16">
@@ -259,7 +267,7 @@ export default async function ServicePage({ params }: PageProps) {
                                 Scopri come posso aiutarti a raggiungere il tuo benessere fisico duraturo.
                             </p>
                             <a
-                                href={service.bookingLink || "https://calendly.com/your-booking-link"}
+                                href={bookingHref}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center px-8 py-4 text-lg font-passion-one font-semibold text-background bg-primary hover:bg-primary/90 rounded-lg transition-colors uppercase tracking-wide"

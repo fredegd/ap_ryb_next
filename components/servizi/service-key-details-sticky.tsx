@@ -7,9 +7,10 @@ import { cn } from "@/lib/utils"
 
 interface ServiceKeyDetailsStickyProps {
     duration?: string
-    price?: string
+    price?: string | number
     priceDescription?: string
     bookingLink?: string
+    bookingPhoneNr?: string
 }
 
 export function ServiceKeyDetailsSticky({
@@ -17,8 +18,15 @@ export function ServiceKeyDetailsSticky({
     price,
     priceDescription,
     bookingLink,
+    bookingPhoneNr,
 }: ServiceKeyDetailsStickyProps) {
-    const bookingHref = bookingLink || "https://calendly.com/your-booking-link"
+    const bookingPhoneHref = bookingPhoneNr
+        ? `tel:${bookingPhoneNr.replace(/\s+/g, "")}`
+        : undefined
+    const bookingHref =
+        bookingLink ||
+        bookingPhoneHref ||
+        "https://www.instagram.com/massoterapista_paradiso/"
     const hasDuration = Boolean(duration)
     const hasPrice = Boolean(price || priceDescription)
     const cardCount = Number(hasDuration) + Number(hasPrice) + 1

@@ -33,6 +33,7 @@ export interface Service {
   faqs: any[]; // refine type if possible later
   relatedServices: any[]; // refine type if possible later
   bookingLink?: string;
+  bookingPhoneNr?: string;
   isFeatured: boolean;
 }
 
@@ -56,6 +57,7 @@ export type ServiceFields = {
   faqs?: ContentfulLink[];
   relatedServices?: ContentfulLink[];
   bookingLink?: string;
+  bookingPhoneNr?: string;
   order?: number;
   status?: string;
   serviceCategory?: ContentfulLink[];
@@ -128,6 +130,7 @@ export function mapService(
     faqs: mapLinkedEntries(item.fields.faqs),
     relatedServices: mapLinkedEntries(item.fields.relatedServices),
     bookingLink: item.fields.bookingLink,
+    bookingPhoneNr: item.fields.bookingPhoneNr,
     isFeatured: item.fields.isFeatured || false,
   };
 }
