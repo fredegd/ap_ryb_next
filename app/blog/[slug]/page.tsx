@@ -93,7 +93,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                     <Link
                         href="/blog"
-                        className="absolute top-5 left-5 z-20 inline-flex items-center gap-2 rounded-xl bg-black/45 backdrop-blur-md text-white px-4 py-2 text-sm font-semibold transition-all opacity-35 hover:opacity-100 hover:bg-black/75"
+                        className="absolute top-5 left-5 z-20 inline-flex items-center gap-2 rounded-lg md:bg-black/45 bg-black/75 backdrop-blur-md text-white px-4 py-2 text-sm font-semibold transition-all opacity-35 hover:opacity-100 hover:bg-black/75"
                     >
                         ← Torna al Blog
                     </Link>
@@ -143,7 +143,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                         {/* Navigation */}
                         <div className="pt-8 border-t border-border">
                             <Link href="/blog">
-                                <button className="text-primary font-semibold hover:text-primary/80 transition-colors flex items-center gap-2">
+                                <button className="text-primary font-semibold hover:text-primary/80 transition-colors rounded-lg flex items-center gap-2 md:bg-black/45 bg-black/75 backdrop-blur-md text-white px-4 py-2 text-sm font-semibold transition-all opacity-35 hover:opacity-100 hover:bg-black/75">
                                     ← Torna al Blog
                                 </button>
                             </Link>
