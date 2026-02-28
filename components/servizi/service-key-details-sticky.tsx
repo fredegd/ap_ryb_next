@@ -34,7 +34,7 @@ export function ServiceKeyDetailsSticky({
     const compact = true
 
     return (
-        <div className="sticky top-16 mx-auto z-40 mb-12">
+        <div className="sticky top-16 mx-auto z-30 mb-12">
             <div
                 className={cn(
                     "grid grid-cols-3 items-stretch gap-2 transition-all duration-300 md:gap-6 md:auto-rows-fr",
